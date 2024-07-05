@@ -64,6 +64,12 @@
   .badge--error {
     @apply bg-rose-600 text-white;
   }
+  .glassmorphism {
+    @apply bg-white bg-opacity-15 backdrop-blur-sm;
+  }
+  .text--white {
+    @apply text-slate-200;
+  }
 }
 
 html,
@@ -73,5 +79,6 @@ body {
   font-family: var(--vazir-font);
   min-height: 100vh;
   user-select: none;
-  background-color: var(--background-app-rgb);
+  background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+  color: var(--background-app-rgb);
 }
