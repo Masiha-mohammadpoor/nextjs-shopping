@@ -5,8 +5,15 @@ import Input from "@/common/Input";
 import http from "@/services/httpServices";
 import toast from "react-hot-toast";
 import { toEnglishDigits } from "@/utils/toEnglishDigits";
+import { useMutation } from "@tanstack/react-query";
+import { getOtp } from "@/services/authService";
+
+
 const Auth = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
+  const {data , error , isPending , mutateAsync} = useMutation({
+    mutationFn : getOtp
+  })
 
   const changeHandler = (e) => {
 
@@ -16,13 +23,14 @@ const Auth = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      const {data : {data}} = await http.post("/user/get-otp" , {phoneNumber});
+      const {data : {data}} = await mutateAsync(phoneNumber);
       console.log(data);
-      setPhoneNumber("")
+      setPhoneNumber("");
     }catch(err){
       toast.error(err?.response?.data?.message);
     }
   };
+
 
   return (
     <section className="w-96 glassmorphism py-6 px-7 rounded-xl mx-auto mt-16 flex justify-center flex-col items-center">
@@ -43,6 +51,7 @@ const Auth = () => {
           value={phoneNumber}
           onChange={changeHandler}
           onSubmit={submitHandler}
+          isPending={isPending}
         />
       </div>
     </section>
