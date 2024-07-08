@@ -2,12 +2,26 @@
 import { FaArrowRight } from "react-icons/fa";
 import { useState } from "react";
 import Input from "@/common/Input";
-
+import http from "@/services/httpServices";
+import toast from "react-hot-toast";
+import { toEnglishDigits } from "@/utils/toEnglishDigits";
 const Auth = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
 
   const changeHandler = (e) => {
-    setPhoneNumber(e.target.value);
+
+    setPhoneNumber(toEnglishDigits(e.target.value));
+  };
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    try {
+      const {data : {data}} = await http.post("/user/get-otp" , {phoneNumber});
+      console.log(data);
+      setPhoneNumber("")
+    }catch(err){
+      toast.error(err?.response?.data?.message);
+    }
   };
 
   return (
@@ -23,20 +37,13 @@ const Auth = () => {
         ورود | ثبت نام
       </div>
       <div className="w-full flex justify-center items-center">
-        <form className="w-full flex flex-col">
-          <Input
-            label="شماره موبایل"
-            name="phoneNumber"
-            value={phoneNumber}
-            onChange={changeHandler}
-          />
-          <button
-            type="submit"
-            className="mt-7 transition-all duration-500 w-44 glassmorphism rounded-xl p-2 text--white hover:bg-blue-700"
-          >
-            ورود
-          </button>
-        </form>
+        <Input
+          label="شماره موبایل"
+          name="phoneNumber"
+          value={phoneNumber}
+          onChange={changeHandler}
+          onSubmit={submitHandler}
+        />
       </div>
     </section>
   );
