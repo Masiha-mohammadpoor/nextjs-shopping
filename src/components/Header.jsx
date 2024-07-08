@@ -9,7 +9,7 @@ const Header = () => {
           <li><Link href="#">محصولات</Link></li>
         </ul>
         <div className="flex items-center justify-between w-24">
-          <button><Link href="/signin">ورود</Link></button>
+          <button><Link href="/auth">ورود</Link></button>
           <span> / </span>
           <button><Link href="/signup">ثبت نام</Link></button>
         </div>
