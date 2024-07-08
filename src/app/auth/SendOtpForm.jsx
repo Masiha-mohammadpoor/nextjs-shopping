@@ -2,7 +2,7 @@
 import { toPersianDigits } from "@/utils/toPersianDigits";
 import { BeatLoader } from "react-spinners";
 
-const Input = ({ label, name, value, onChange, onSubmit , isPending}) => {
+const SendOtpForm = ({ label, name, value, onChange, onSubmit , getOtpLoading}) => {
 
   const override = {
     display: "block",
@@ -29,10 +29,10 @@ const Input = ({ label, name, value, onChange, onSubmit , isPending}) => {
         type="submit"
         className="mt-7 flex justify-center items-center transition-all duration-500 w-44 glassmorphism rounded-xl p-2 text--white hover:bg-blue-700"
       >
-        {isPending ? 
+        {getOtpLoading ? 
         <BeatLoader
         color={"#ffffff"}
-        loading={isPending}
+        loading={getOtpLoading}
         cssOverride={override}
         size={10}
       /> : "ورود"}
@@ -41,4 +41,4 @@ const Input = ({ label, name, value, onChange, onSubmit , isPending}) => {
   );
 };
 
-export default Input;
+export default SendOtpForm;
