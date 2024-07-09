@@ -8,10 +8,13 @@ import { checkOtp, getOtp } from "@/services/authService";
 import SendOtpForm from "./sendOtpForm";
 import CheckOtpForm from "./CheckOtpForm";
 import { toPersianDigits } from "@/utils/toPersianDigits";
+import { useRouter } from "next/navigation";
 
 const RESEND_TIME = 90;
 
 const Auth = () => {
+
+  const router = useRouter();
   const [phoneNumber, setPhoneNumber] = useState("");
   const [step, setStep] = useState(1);
   const [otp, setOtp] = useState("");
@@ -19,8 +22,7 @@ const Auth = () => {
   const { isPending: getOtpLoading, mutateAsync } = useMutation({
     mutationFn: getOtp,
   });
-  const { isPending: checkOtpLoading, mutateAsync: checkOtpMutate } =
-    useMutation({
+  const { isPending: checkOtpLoading, mutateAsync: checkOtpMutate } = useMutation({
       mutationFn: checkOtp,
     });
 
@@ -45,6 +47,7 @@ const Auth = () => {
         data: { data },
       } = await mutateAsync(phoneNumber);
       console.log(data);
+      setOtp("");
       setStep(2);
       setTime(RESEND_TIME);
     } catch (err) {
@@ -52,7 +55,7 @@ const Auth = () => {
       // delete after
       setStep(2);
       setTime(RESEND_TIME);
-
+      setOtp("");
     }
   };
 
@@ -61,8 +64,13 @@ const Auth = () => {
     try {
       const {
         data: { data },
-      } = await checkOtpMutate(phoneNumber, otp);
-      console.log(data);
+      } = await checkOtpMutate({phoneNumber , otp});
+      toast.success(data.message);
+      if(data.user.isActive){
+        router.push("/");
+      }else {
+        router.push("/complete-profile")
+      }
       setOtp("");
     } catch (err) {
       toast.error(err?.response?.data?.message);
@@ -74,8 +82,6 @@ const Auth = () => {
       case 1: {
         return (
           <SendOtpForm
-            label="شماره موبایل"
-            name="phoneNumber"
             value={phoneNumber}
             onChange={phoneNumberHandler}
             onSubmit={submitPhoneNumber}
@@ -94,6 +100,7 @@ const Auth = () => {
             checkOtpLoading={checkOtpLoading}
             time={time}
             onResendOtp={submitPhoneNumber}
+            setStep={setStep}
           />
         );
       }

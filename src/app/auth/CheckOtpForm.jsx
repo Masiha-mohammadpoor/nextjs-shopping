@@ -2,6 +2,7 @@
 import { toPersianDigits } from "@/utils/toPersianDigits";
 import OtpInput from "react-otp-input";
 import { BeatLoader } from "react-spinners";
+import { CiEdit } from "react-icons/ci";
 
 const CheckOtpForm = ({
   label,
@@ -12,12 +13,14 @@ const CheckOtpForm = ({
   checkOtpLoading,
   time,
   onResendOtp,
+  setStep
 }) => {
   return (
     <form onSubmit={onSubmit} className="w-full flex flex-col">
       <div className="w-full flex flex-col">
-        <label htmlFor={name} className="text--white mb-3 text-sm">
-          {label}
+        <label htmlFor={name} className="text--white mb-3 flex justify-between text-sm">
+          <span>{label}</span>
+          <span><button onClick={() => setStep(s => s-1)} className="text-blue-800 flex items-center">ویرایش شماره موبایل <CiEdit className="mr-2"/></button></span>
         </label>
         <OtpInput
           value={value}
@@ -43,13 +46,13 @@ const CheckOtpForm = ({
         />
       </div>
       {time > 0 ? (
-        <p className="mt-4 text--white">
-          <span className="inline-block w-5">{toPersianDigits(time)}</span> تا
+        <p className="flex justify-center mt-4 text--white">
+          <span className="inline-block w-5 ml-1"> {toPersianDigits(time)} </span> تا
           ارسال مجدد کد
         </p>
       ) : (
         <button
-          className="flex justify-start mt-4 text--white"
+          className="flex justify-center mt-4 text--white text-blue-800 font-bold"
           onClick={onResendOtp}
         >
           ارسال مجدد کد
@@ -63,7 +66,6 @@ const CheckOtpForm = ({
           <BeatLoader
             color={"#ffffff"}
             loading={checkOtpLoading}
-            cssOverride={override}
             size={10}
           />
         ) : (

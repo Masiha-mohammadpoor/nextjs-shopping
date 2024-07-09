@@ -1,8 +1,9 @@
 "use client";
+import Input from "@/common/Input";
 import { toPersianDigits } from "@/utils/toPersianDigits";
 import { BeatLoader } from "react-spinners";
 
-const SendOtpForm = ({ label, name, value, onChange, onSubmit , getOtpLoading}) => {
+const SendOtpForm = ({ value, onChange, onSubmit , getOtpLoading}) => {
 
 
   const override = {
@@ -14,7 +15,7 @@ const SendOtpForm = ({ label, name, value, onChange, onSubmit , getOtpLoading}) 
   return (
     <form onSubmit={onSubmit} className="w-full flex flex-col">
       <div className="w-full flex flex-col">
-        <label htmlFor={name} className="text--white mb-3 text-sm">
+        {/* <label htmlFor={name} className="text--white mb-3 text-sm">
           {label}
         </label>
         <input
@@ -25,7 +26,8 @@ const SendOtpForm = ({ label, name, value, onChange, onSubmit , getOtpLoading}) 
           onChange={onChange}
           autoComplete="off"
           className="textField__input"
-        />
+        /> */}
+        <Input name="phoneNumber" label="شماره موبایل" value={value} onChange={onChange}/>
       </div>
       <button
         type="submit"
