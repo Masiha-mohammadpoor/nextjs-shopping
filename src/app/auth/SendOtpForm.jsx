@@ -4,6 +4,7 @@ import { BeatLoader } from "react-spinners";
 
 const SendOtpForm = ({ label, name, value, onChange, onSubmit , getOtpLoading}) => {
 
+
   const override = {
     display: "block",
     margin: "0 auto",
@@ -20,6 +21,7 @@ const SendOtpForm = ({ label, name, value, onChange, onSubmit , getOtpLoading}) 
           type="text"
           id={name}
           value={toPersianDigits(value)}
+          dir="ltr"
           onChange={onChange}
           autoComplete="off"
           className="textField__input"
