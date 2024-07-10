@@ -43,10 +43,7 @@ const Auth = () => {
   const submitPhoneNumber = async (e) => {
     e.preventDefault();
     try {
-      const {
-        data: { data },
-      } = await mutateAsync(phoneNumber);
-      console.log(data);
+      const data = await mutateAsync(phoneNumber);
       setOtp("");
       setStep(2);
       setTime(RESEND_TIME);
@@ -62,11 +59,9 @@ const Auth = () => {
   const submitOtp = async (e) => {
     e.preventDefault();
     try {
-      const {
-        data: { data },
-      } = await checkOtpMutate({phoneNumber , otp});
-      toast.success(data.message);
-      if(data.user.isActive){
+      const {user , message} = await checkOtpMutate({phoneNumber , otp});
+      toast.success(message);
+      if(user.isActive){
         router.push("/");
       }else {
         router.push("/complete-profile")

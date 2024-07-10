@@ -4,11 +4,6 @@ import { toPersianDigits } from "@/utils/toPersianDigits";
 import { BeatLoader } from "react-spinners";
 
 const SendOtpForm = ({ value, onChange, onSubmit, getOtpLoading }) => {
-  const override = {
-    display: "block",
-    margin: "0 auto",
-    borderColor: "#ffffff",
-  };
 
   return (
     <form onSubmit={onSubmit} className="w-full flex flex-col">
@@ -28,7 +23,6 @@ const SendOtpForm = ({ value, onChange, onSubmit, getOtpLoading }) => {
           <BeatLoader
             color={"#ffffff"}
             loading={getOtpLoading}
-            cssOverride={override}
             size={10}
           />
         ) : (

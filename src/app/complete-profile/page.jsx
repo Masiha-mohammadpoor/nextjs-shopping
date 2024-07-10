@@ -26,11 +26,9 @@ const CompleteProfile = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      const {
-        data: { data },
-      } = await mutateAsync(values);
-      toast.success(data?.message);
-      if (data.user.isActive) router.push("/");
+      const {user , message} = await mutateAsync(values);
+      toast.success(message);
+      if (user.isActive) router.push("/");
     } catch (err) {
       toast.error(err?.response?.data?.message);
     }
