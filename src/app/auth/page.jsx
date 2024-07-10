@@ -62,7 +62,8 @@ const Auth = () => {
       const {user , message} = await checkOtpMutate({phoneNumber , otp});
       toast.success(message);
       if(user.isActive){
-        router.push("/");
+        router.replace("/");
+        
       }else {
         router.push("/complete-profile")
       }

@@ -9,7 +9,7 @@ const Header = () => {
     queryKey : ["get-user"],
     queryFn : getUserProfile,
     retry : false,
-    refetchOnWindowFocus : true
+    refetchOnWindowFocus : true,
   });
 
   const {user , cart} = data || {};
@@ -23,7 +23,7 @@ const Header = () => {
           <li><Link href="#">محصولات</Link></li>
         </ul>
         {!user && !isLoading ? <div className="flex items-center justify-between w-24">
-          <button><Link href="/auth">ورود / ثبت‌نام</Link></button>
+          <button><Link href="/auth">ورود / ثبت نام</Link></button>
         </div> : user ? <div>{user.name}</div> : <div></div>}
       </header>
     </section>

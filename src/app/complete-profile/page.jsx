@@ -29,6 +29,7 @@ const CompleteProfile = () => {
       const {user , message} = await mutateAsync(values);
       toast.success(message);
       if (user.isActive) router.push("/");
+      window.location.reload();
     } catch (err) {
       toast.error(err?.response?.data?.message);
     }
