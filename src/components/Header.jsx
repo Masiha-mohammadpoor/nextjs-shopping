@@ -1,16 +1,10 @@
 "use client"
-import { getUserProfile } from "@/services/authService";
-import { useQuery } from "@tanstack/react-query";
+import useGetUser from "@/hooks/useAuth";
 import Link from "next/link";
 
 const Header = () => {
 
-  const {data , error , isLoading} = useQuery({
-    queryKey : ["get-user"],
-    queryFn : getUserProfile,
-    retry : false,
-    refetchOnWindowFocus : true,
-  });
+  const {data , isLoading} = useGetUser();
 
   const {user , cart} = data || {};
 
