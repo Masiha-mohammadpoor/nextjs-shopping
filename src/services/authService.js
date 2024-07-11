@@ -15,3 +15,7 @@ export const completeProfile = (data) => {
 export const getUserProfile = () => {
   return http.get("/user/profile").then(({data}) => data.data);
 }
+
+export const updateUser = (data) => {
+  return http.patch("/user/update" , data).then(({data}) => data.data);
+}

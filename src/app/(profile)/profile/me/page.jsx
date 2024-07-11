@@ -3,11 +3,20 @@ import Input from "@/common/Input";
 import useGetUser from "@/hooks/useAuth";
 import { toEnglishDigits } from "@/utils/toEnglishDigits";
 import { toPersianDigits } from "@/utils/toPersianDigits";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
+import { BeatLoader } from "react-spinners";
+import { updateUser } from "@/services/authService";
+import toast from "react-hot-toast";
 
 const Me = () => {
   const { data, isLoading } = useGetUser();
   const { user, cart } = data || {};
+
+  const { isPending , mutateAsync} = useMutation({
+    mutationFn : updateUser
+  });
+  const queryClient = useQueryClient();
 
   const [formData, setFormData] = useState({
     name: "",
@@ -61,17 +70,42 @@ const Me = () => {
     },
   ];
 
+  const updateUserData = async (e) => {
+    e.preventDefault();
+    try {
+      const data = await mutateAsync(formData);
+      queryClient.invalidateQueries({queryKey : ["get-user"]})
+      toast.success(data.message);
+    }catch(err){
+      toast.error(err?.response?.data?.message);
+    }
+  }
+
   return (
     <div dir="rtl">
-      <form className="w-1/3 flex gap-y-4 flex-col">
+      <form onSubmit={updateUserData} className="w-1/3 flex gap-y-4 flex-col">
         {fields.map((field) => {
-          console.log(field.value);
           return (
             <div key={field.name}>
               <Input {...field} value={toPersianDigits(field.value)} />
             </div>
           );
         })}
+      <button
+        type="submit"
+        className="mt-7 flex justify-center items-center transition-all duration-500 w-44 glassmorphism rounded-xl p-2 text--white hover:bg-blue-700"
+      >
+        {isPending ? (
+          <BeatLoader
+            color={"#ffffff"}
+            loading={isPending}
+            size={10}
+          />
+        ) : (
+          "به روز رسانی"
+        )}
+        </button>
+
       </form>
     </div>
   );
