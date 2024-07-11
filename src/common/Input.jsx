@@ -1,5 +1,7 @@
 "use client"
 
+import { toPersianDigits } from "@/utils/toPersianDigits";
+
 const Input = ({name , label , value , onChange}) => {
   return (
     <>
@@ -11,10 +13,11 @@ const Input = ({name , label , value , onChange}) => {
         id={name}
         name={name}
         value={value}
-        dir="ltr"
+        dir="rtl"
         onChange={onChange}
         autoComplete="off"
         className="textField__input"
+        
       />
     </>
   );
