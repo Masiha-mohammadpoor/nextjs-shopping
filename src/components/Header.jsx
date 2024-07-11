@@ -1,24 +1,62 @@
-"use client"
+"use client";
 import useGetUser from "@/hooks/useAuth";
+import { toPersianDigits } from "@/utils/toPersianDigits";
 import Link from "next/link";
+import { FiUser } from "react-icons/fi";
+import { TiArrowSortedDown } from "react-icons/ti";
+import useComponentVisible from "@/hooks/useComponentVisible";
 
 const Header = () => {
 
-  const {data , isLoading} = useGetUser();
+  const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false);
+  const { data, isLoading } = useGetUser();
 
-  const {user , cart} = data || {};
-
+  const { user, cart } = data || {};
+  console.log(user)
 
   return (
     <section>
       <header className="flex justify-between p-4 px-20 glassmorphism text--white">
         <ul className="flex items-center justify-between w-32">
-          <li><Link href="/">خانه</Link></li>
-          <li><Link href="#">محصولات</Link></li>
+          <li>
+            <Link href="/">خانه</Link>
+          </li>
+          <li>
+            <Link href="#">محصولات</Link>
+          </li>
         </ul>
-        {!user && !isLoading ? <div className="flex items-center justify-between w-24">
-          <button><Link href="/auth">ورود / ثبت نام</Link></button>
-        </div> : user ? <div>{user.name}</div> : <div></div>}
+        {!user && !isLoading ? (
+          <div className="flex items-center justify-between w-24">
+            <button>
+              <Link href="/auth">ورود / ثبت نام</Link>
+            </button>
+          </div>
+        ) : user ? (
+            <button ref={ref} onClick={() => setIsComponentVisible(!isComponentVisible)} className="relative flex p-2.5 rounded-md items-center glassmorphism">
+              <span>
+                <TiArrowSortedDown className="text--white" size={15} />
+              </span>
+              <span>
+                <FiUser className="text--white" size={25} />
+              </span>
+            <div  ref={ref} className={`${isComponentVisible ? "flex" : "hidden"} flex-col items-center rounded-lg overflow-hidden z-20 absolute top-12 left-12 glassmorphism w-56 p-3`}>
+              <div className="w-full flex justify-start mb-3">
+                <div className="ml-3 text--white bg-blue-600 rounded-full w-14 h-14 flex justify-center items-center text-2xl">{user?.name.charAt(0)}</div>
+                <div className="flex flex-col items-start justify-between py-1">
+                  <p className="text-base">{user?.name}</p>
+                  <p className="text-sm">{toPersianDigits(user?.phoneNumber)}</p>
+                </div>
+              </div>
+              <div className="w-full mx-2 h-[1px] bg-slate-200 mb-3"></div>
+              <ul className=" w-full flex flex-col items-start gap-y-2">
+              <Link href="/profile" className="transition-all duration-500 rounded-full hover:glassmorphism p-2 px-3"><li onClick={() => console.log("hello")}>حساب کاربری</li></Link>
+              <Link href="/profile" className="transition-all duration-500 rounded-full hover:glassmorphism p-2 px-3"><li>سفارش های من</li></Link>
+              </ul>
+            </div>
+          </button>
+        ) : (
+          <div></div>
+        )}
       </header>
     </section>
   );
