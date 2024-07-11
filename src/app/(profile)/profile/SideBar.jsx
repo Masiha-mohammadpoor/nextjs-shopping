@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const SideBar = () => {
   return (
-    <article className="glassmorphism h-full py-4">
+    <article className="h-full py-4 glassmorphism">
       <div className="px-6 flex items-center mb-10">
         <Image src="/icon.png" alt="فرانت شاپ" width={40} height={40} className="ml-3"/>
         <h1 className="text--white text-2xl font-bold">فرانت شاپ</h1>

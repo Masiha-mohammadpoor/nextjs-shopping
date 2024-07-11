@@ -15,8 +15,8 @@ export default function RootLayout({ children }) {
       <body className={`${vazirFont.variable} font-sans`}>
         <Providers>
           <main className="grid grid-cols-4 h-screen">
-          <section className="col-span-1"><SideBar/></section>
-          <section className="col-span-3">{children}</section>
+          <section className="overflow-y-auto col-span-1"><SideBar/></section>
+          <section className="overflow-y-auto col-span-3">{children}</section>
           </main>
         </Providers>
         <Toaster />

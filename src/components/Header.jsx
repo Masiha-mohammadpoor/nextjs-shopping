@@ -32,14 +32,14 @@ const Header = () => {
             </button>
           </div>
         ) : user ? (
-            <button ref={ref} onClick={() => setIsComponentVisible(!isComponentVisible)} className="relative flex p-2.5 rounded-md items-center glassmorphism">
+            <button ref={ref} onClick={() => setIsComponentVisible(!isComponentVisible)} className="relative flex rounded-md items-center">
               <span>
                 <TiArrowSortedDown className="text--white" size={15} />
               </span>
               <span>
                 <FiUser className="text--white" size={25} />
               </span>
-            <div  ref={ref} className={`${isComponentVisible ? "flex" : "hidden"} flex-col items-center rounded-lg overflow-hidden z-20 absolute top-12 left-12 glassmorphism w-56 p-3`}>
+            <div  ref={ref} className={`${isComponentVisible ? "flex" : "hidden"} flex-col items-center rounded-lg overflow-hidden z-20 absolute top-8 left-8 glassmorphism w-56 p-3`}>
               <div className="w-full flex justify-start mb-3">
                 <div className="ml-3 text--white bg-blue-600 rounded-full w-14 h-14 flex justify-center items-center text-2xl">{user?.name.charAt(0)}</div>
                 <div className="flex flex-col items-start justify-between py-1">
