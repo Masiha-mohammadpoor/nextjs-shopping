@@ -19,3 +19,7 @@ export const getUserProfile = () => {
 export const updateUser = (data) => {
   return http.patch("/user/update" , data).then(({data}) => data.data);
 }
+
+export const logoutUser = (data) => {
+  return http.post("/user/logout").then(({data}) => data.data);
+}

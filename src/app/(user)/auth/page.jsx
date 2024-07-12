@@ -3,7 +3,7 @@ import { FaArrowRight } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { toEnglishDigits } from "@/utils/toEnglishDigits";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { checkOtp, getOtp } from "@/services/authService";
 import SendOtpForm from "./sendOtpForm";
 import CheckOtpForm from "./CheckOtpForm";
@@ -15,6 +15,7 @@ const RESEND_TIME = 90;
 const Auth = () => {
 
   const router = useRouter();
+  const queryClient = useQueryClient()
   const [phoneNumber, setPhoneNumber] = useState("");
   const [step, setStep] = useState(1);
   const [otp, setOtp] = useState("");
@@ -61,6 +62,8 @@ const Auth = () => {
     try {
       const {user , message} = await checkOtpMutate({phoneNumber , otp});
       toast.success(message);
+      queryClient.invalidateQueries({queryKey : ["get-user"]})
+
       if(user.isActive){
         router.replace("/");
         
