@@ -12,7 +12,6 @@ const Header = () => {
   const { data, isLoading } = useGetUser();
 
   const { user, cart } = data || {};
-  console.log(user)
 
   return (
     <section>
@@ -22,7 +21,7 @@ const Header = () => {
             <Link href="/">خانه</Link>
           </li>
           <li>
-            <Link href="#">محصولات</Link>
+            <Link href="/products">محصولات</Link>
           </li>
         </ul>
         {!user && !isLoading ? (
