@@ -1,18 +1,17 @@
 "use client";
 import CheckBox from "@/common/CheckBox";
-// import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useState } from "react";
-import { usePathname } from "next/navigation";
-import { useSearchParams } from "next/navigation";
-import { useRouter } from "next/navigation";
 
 const CategorySidebar = ({ categories }) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const categoryQueries = searchParams.get("category");
+
 
   const [selectedCategories, setSelectedCategories] = useState(
-    searchParams.get("category").split(",") || []
+    categoryQueries ? searchParams.get("category").split(",") : []
   );
 
   const createQueryString = useCallback(

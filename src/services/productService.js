@@ -1,5 +1,5 @@
 import http from "./httpServices";
 
-export const getProducts = () => {
-  return http.get("/product/list").then(({data}) => data.data);
+export const getProducts = (qs) => {
+  return http.get(`/product/list?${qs}`).then(({data}) => data.data);
 }
