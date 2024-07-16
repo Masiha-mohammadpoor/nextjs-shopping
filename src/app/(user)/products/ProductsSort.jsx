@@ -1,7 +1,7 @@
 "use client";
 import Radio from "@/common/Radio";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 const sortOptions = [
   {
@@ -27,6 +27,11 @@ const ProductSort = () => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  
+
+  useEffect(() => {
+    setSortProducts(searchParams.get("sort") || "");
+  } , [searchParams])
 
 
   const createQueryString = useCallback(
@@ -38,6 +43,7 @@ const ProductSort = () => {
     },
     [searchParams]
   );
+
 
 
   const sortHandler = (e) => {
