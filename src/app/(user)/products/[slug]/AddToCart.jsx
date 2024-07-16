@@ -1,40 +1,49 @@
 "use client";
 import useGetUser from "@/hooks/useAuth";
 import { addToCart } from "@/services/cartService";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
-const AddToCart = ({product}) => {
+const AddToCart = ({ product }) => {
 
+  const queryClient = useQueryClient()
   const router = useRouter();
-  const {data} = useGetUser();
-  const {isPending , mutateAsync} = useMutation({
-    mutationFn : addToCart
-  })
-  const {user , cart} = data || {};
+  const { data } = useGetUser();
+  const { isPending, mutateAsync } = useMutation({
+    mutationFn: addToCart,
+  });
+  const { user , cart} = data || {};
   console.log(cart)
 
   const addToCartHandler = async () => {
-    if(!user){
+    if (!user) {
       toast.error("لطفا ابتدا وارد شوید");
-      router.push("/auth")
-    }else {
-      try{
-        const {message} = await mutateAsync(product._id);
+      router.push("/auth");
+    } else {
+      try {
+        const { message } = await mutateAsync(product._id);
+        queryClient.invalidateQueries({ queryKey: ["get-user"] });
         toast.success(message);
-      }catch(err){
+      } catch (err) {
         toast.error(err?.response?.data?.message);
       }
     }
+  };
+
+  const isInCart = (user , product) => {
+    if(!user) return false;
+    return user?.cart?.products.some((p) => p.productId === product._id)
   }
+
+  console.log(isInCart(user , product))
 
   return (
     <div>
-      <button onClick={addToCartHandler}>افزودن به سبد خرید</button>
+      {!isInCart(user , product) ? <button onClick={addToCartHandler}>افزودن به سبد خرید</button> : <Link href="/cart">ادامه سفارش</Link>}
     </div>
   );
+};
 
-}
- 
 export default AddToCart;
