@@ -1,4 +1,5 @@
 import { getProducts, getSingleProduct } from "@/services/productService";
+import AddToCart from "./AddToCart";
 
 export const dynamic = "force-static";
 export const dynamicParams = true;
@@ -19,6 +20,7 @@ const ProductPage = async ({params}) => {
   return (
     <section>
       <p className="text--white">{product?.title}</p>
+      <AddToCart product={product}/>
     </section>
   );
 }
