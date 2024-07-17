@@ -1,6 +1,8 @@
 "use client";
 import useGetUser from "@/hooks/useAuth";
 import Link from "next/link";
+import CartItems from "./CartItems";
+import CartSummary from "./CartSummary";
 
 const Cart = () => {
   const { data, isLoading } = useGetUser();
@@ -24,19 +26,8 @@ const Cart = () => {
     }
     return (
       <>
-        <div className="col-span-2 bg-red-400">
-          {cart?.productDetail.map((p) => {
-            return (
-              <div className="bg-blue-400 mb-2" key={p._id}>
-                <div>
-                  <p>{p.title}</p>
-                  <p>{p.price}</p>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-        <div className="col-span-1 bg-red-900">fdg</div>
+      <CartItems cart={cart}/>
+      <CartSummary payDetail={cart?.payDetail}/>
       </>
     );
   };
