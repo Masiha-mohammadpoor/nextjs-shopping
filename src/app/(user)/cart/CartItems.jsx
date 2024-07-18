@@ -1,5 +1,6 @@
 "use client";
 import { useAddToCart, useDecrementFromCart } from "@/hooks/useCart";
+import { toPersianNumberWithCommas } from "@/utils/putCommaInNumber";
 import { useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { FaPlus } from "react-icons/fa";
@@ -41,7 +42,7 @@ const CartItems = ({ cart }) => {
           >
             <div>
               <p>{p.title}</p>
-              <p>{p.price}</p>
+              <p>{toPersianNumberWithCommas(p.price)}</p>
               <p>{p.quantity} تعداد</p>
             </div>
             <div>
