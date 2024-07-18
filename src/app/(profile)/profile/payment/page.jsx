@@ -25,7 +25,7 @@ const Payment = () => {
             return <tr key={p._id}>
               <td>{index}</td>
               <td>{p.invoiceNumber}</td>
-              <td>{p.description}</td>
+              <td className="max-w-[280px] whitespace-nowrap truncate">{p.description}</td>
               <td>{p.cart.productDetail.map(product => {
                 return <span key={product._id}>{product.title} </span>
               })}</td>

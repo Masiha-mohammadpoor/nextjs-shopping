@@ -3,12 +3,18 @@ import CategorySidebar from "./CategorySidebar";
 import { getCategories } from "@/services/categoryService";
 import queryString from "query-string";
 import Link from "next/link";
+import LikeButton from "./LikeButton";
+import { cookies } from "next/headers";
+import { toStringCookies } from "@/utils/toStringCookies";
 
 export const dynamic = "force-dynamic";
 
 const Products = async ({searchParams}) => {
-  
-  const productsPromise = getProducts(queryString.stringify(searchParams));
+
+
+  const cookieStore = cookies();
+  const strCookies = toStringCookies(cookieStore)
+  const productsPromise = getProducts(queryString.stringify(searchParams) , strCookies);
   const categorisPromise = getCategories();
 
   const [{products} , {categories}] = await Promise.all([productsPromise , categorisPromise]);
@@ -23,6 +29,7 @@ const Products = async ({searchParams}) => {
             <p>{p.description}</p>
             <p>{p.price}</p>
             <Link href={`/products/${p.slug}`}>مشاهده محصول</Link>
+            <LikeButton product={p}/>
           </div>
         })}
       </article>
