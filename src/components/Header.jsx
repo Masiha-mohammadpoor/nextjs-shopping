@@ -48,8 +48,8 @@ const Header = () => {
               </div>
               <div className="w-full mx-2 h-[1px] bg-slate-200 mb-3"></div>
               <ul className=" w-full flex flex-col items-start gap-y-2">
-              <Link href="/profile" className="w-full flex justify-start transition-all duration-500 rounded-full hover:glassmorphism p-2 px-3"><li onClick={() => console.log("hello")}>حساب کاربری</li></Link>
-              <Link href="/profile" className="w-full flex justify-start transition-all duration-500 rounded-full hover:glassmorphism p-2 px-3"><li>سفارش های من</li></Link>
+              <Link href="/profile" className="w-full flex justify-start transition-all duration-500 rounded-full hover:glassmorphism p-2 px-3"><li>حساب کاربری</li></Link>
+              <Link href="/profile/payment" className="w-full flex justify-start transition-all duration-500 rounded-full hover:glassmorphism p-2 px-3"><li>سفارش های من</li></Link>
               </ul>
             </div>
           </button>
