@@ -1,5 +1,6 @@
 "use client";
 import useGetUser from "@/hooks/useAuth";
+import { useAddToCart } from "@/hooks/useCart";
 import { addToCart } from "@/services/cartService";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
@@ -11,9 +12,7 @@ const AddToCart = ({ product }) => {
   const queryClient = useQueryClient()
   const router = useRouter();
   const { data } = useGetUser();
-  const { isPending, mutateAsync } = useMutation({
-    mutationFn: addToCart,
-  });
+  const { isPending, mutateAsync } = useAddToCart();
   const { user , cart} = data || {};
   console.log(cart)
 
