@@ -53,7 +53,7 @@
     @apply whitespace-nowrap px-3 py-1 rounded-xl;
   }
   .badge--primary {
-    @apply bg-primary-900 text-white;
+    @apply flex items-center text-xs text--white px-2 py-1 rounded-full bg-primary-800;
   }
   .badge--secondary {
     @apply bg-secondary-600 text-white;
@@ -62,7 +62,7 @@
     @apply bg-green-600 text-white;
   }
   .badge--error {
-    @apply bg-rose-600 text-white;
+    @apply flex items-center text-xs text--white px-2 rounded-full bg-error;
   }
   .glassmorphism {
     @apply bg-white bg-opacity-20 backdrop-blur-sm;
@@ -86,4 +86,26 @@ body {
 
 input {
   font-family: var(--vazir-font);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #252585; 
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #29299e; 
 }

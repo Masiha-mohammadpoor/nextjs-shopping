@@ -2,6 +2,7 @@
 import CheckBox from "@/common/CheckBox";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useState } from "react";
+import { FiFilter } from "react-icons/fi";
 
 
 const ProductsFilter = ({categories}) => {
@@ -47,8 +48,11 @@ const ProductsFilter = ({categories}) => {
 }
 
   return (
-    <div className="glassmorphism">
-    <p className="text--white font-bold">دسته بندی ها</p>
+    <div className="my-5">
+    <p className="flex items-center gap-x-3 mb-3 text--white font-bold">
+      <FiFilter size={20}/>
+      دسته بندی ها 
+    </p>
     <ul>
       {categories.map((category) => {
         return (

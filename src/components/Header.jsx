@@ -14,7 +14,6 @@ const Header = () => {
   const { user, cart } = data || {};
 
   return (
-    <section>
       <header className="flex justify-between p-4 px-20 glassmorphism text--white">
         <ul className="flex items-center justify-between w-32">
           <li>
@@ -57,7 +56,6 @@ const Header = () => {
           <div></div>
         )}
       </header>
-    </section>
   );
 };
 

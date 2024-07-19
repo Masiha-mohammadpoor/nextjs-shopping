@@ -4,6 +4,8 @@ import { likeProduct } from "@/services/productService";
 import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { useRouter , usePathname} from "next/navigation";
+import { FaHeart , FaRegHeart } from "react-icons/fa";
+
 
 const LikeButton = ({ product }) => {
 
@@ -23,7 +25,7 @@ const LikeButton = ({ product }) => {
   };
   return (
     <div>
-      <button onClick={likeHandler}>{product.isLiked ? "لایک شده" : "لایک کنید"}</button>
+      <button onClick={likeHandler}>{product.isLiked ? <FaHeart className="text-2xl text-error"/> : <FaRegHeart className="text-2xl text-error"/>}</button>
     </div>
   );
 };
