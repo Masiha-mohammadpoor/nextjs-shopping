@@ -5,6 +5,7 @@ import Link from "next/link";
 import { FiUser } from "react-icons/fi";
 import { TiArrowSortedDown } from "react-icons/ti";
 import useComponentVisible from "@/hooks/useComponentVisible";
+import { IoMenu } from "react-icons/io5";
 
 const Header = () => {
 
@@ -13,9 +14,13 @@ const Header = () => {
 
   const { user, cart } = data || {};
 
+
   return (
-      <header className="flex justify-between p-4 px-20 glassmorphism text--white">
+      <header className="flex z-40 justify-between p-4 px-20 glassmorphism text--white">
         <ul className="flex items-center justify-between w-32">
+          <li>
+            <button onClick={showHandler}><IoMenu/></button>
+          </li>
           <li>
             <Link href="/">خانه</Link>
           </li>

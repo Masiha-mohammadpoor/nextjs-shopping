@@ -4,8 +4,8 @@ import ProductSort from "./ProductsSort";
 const CategorySidebar = ({ categories }) => {
 
   return (
-    <article className="h-screen p-5 px-8 glassmorphism col-span-1">
-      <h1 className="text-primary-900 font-bold text-xl">فیلتر و مرتب‌سازی</h1>
+    <article className="relative lg:static -right-96 lg:right-0 h-screen p-5 px-8 glassmorphism lg:col-span-1 w-[250px] lg:w-auto z-20">
+      <h1 className="text-primary-900 font-bold text-xl">فیلترها</h1>
       <ProductsFilter categories={categories}/>
       <ProductSort/>
     </article>

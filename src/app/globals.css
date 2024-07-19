@@ -65,7 +65,7 @@
     @apply flex items-center text-xs text--white px-2 rounded-full bg-error;
   }
   .glassmorphism {
-    @apply bg-white bg-opacity-20 backdrop-blur-sm;
+    @apply bg-white bg-opacity-20 backdrop-blur-lg;
   }
   .text--white {
     @apply text-slate-200;
