@@ -6,20 +6,20 @@ import { FiUser } from "react-icons/fi";
 import { TiArrowSortedDown } from "react-icons/ti";
 import useComponentVisible from "@/hooks/useComponentVisible";
 import { IoMenu } from "react-icons/io5";
+import useMenu from "@/hooks/useMenu";
 
 const Header = () => {
 
   const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false);
   const { data, isLoading } = useGetUser();
-
   const { user, cart } = data || {};
-
+  const {showMenu,setShowMenu} = useMenu();
 
   return (
       <header className="flex z-40 justify-between p-4 px-20 glassmorphism text--white">
         <ul className="flex items-center justify-between w-32">
           <li>
-            <button onClick={showHandler}><IoMenu/></button>
+            <button onClick={() => setShowMenu(!showMenu)}><IoMenu/></button>
           </li>
           <li>
             <Link href="/">خانه</Link>
