@@ -7,6 +7,10 @@ import { TiArrowSortedDown } from "react-icons/ti";
 import useComponentVisible from "@/hooks/useComponentVisible";
 import { IoMenu } from "react-icons/io5";
 import useMenu from "@/hooks/useMenu";
+import { MdOutlineShoppingCart } from "react-icons/md";
+import { usePathname } from "next/navigation";
+
+
 
 const Header = () => {
 
@@ -14,13 +18,14 @@ const Header = () => {
   const { data, isLoading } = useGetUser();
   const { user, cart } = data || {};
   const {showMenu,setShowMenu} = useMenu();
+  const pathname = usePathname();
 
   return (
-      <header className="flex z-40 justify-between p-4 px-20 glassmorphism text--white">
-        <ul className="flex items-center justify-between w-32">
-          <li>
-            <button onClick={() => setShowMenu(!showMenu)}><IoMenu/></button>
-          </li>
+      <headerr ref={ref} className="flex z-40 justify-between py-4 px-2 sm:p-4 sm:px-20 glassmorphism text--white">
+        <ul className="flex items-center justify-between gap-x-3 sm:gap-x-7">
+          {pathname === "/products" && <li className="flex lg:hidden items-center">
+            <button onClick={() => setShowMenu(!showMenu)}><IoMenu size={25}/></button>
+          </li>}
           <li>
             <Link href="/">خانه</Link>
           </li>
@@ -35,7 +40,9 @@ const Header = () => {
             </button>
           </div>
         ) : user ? (
-            <button ref={ref} onClick={() => setIsComponentVisible(!isComponentVisible)} className="relative flex rounded-md items-center">
+          <div className="flex gap-x-2 sm:gap-x-8 p-0">
+            <Link href="/cart"><button className="w-10 h-7 pt-1 relative flex justify-center"><MdOutlineShoppingCart size={23}/><span className="absolute badge--error -top-1.5 -right-1.5">{toPersianDigits(cart?.productDetail?.length)}</span></button></Link>
+            <button ref={ref} onClick={() => setIsComponentVisible(!isComponentVisible)} className="h-7 relative flex rounded-md items-center">
               <span>
                 <TiArrowSortedDown className="text--white" size={15} />
               </span>
@@ -57,10 +64,11 @@ const Header = () => {
               </ul>
             </div>
           </button>
+          </div>
         ) : (
           <div></div>
         )}
-      </header>
+      </headerr>
   );
 };
 
