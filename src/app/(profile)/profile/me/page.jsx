@@ -82,8 +82,8 @@ const Me = () => {
   }
 
   return (
-    <div dir="rtl">
-      <form onSubmit={updateUserData} className="w-1/3 flex gap-y-4 flex-col">
+    <div dir="rtl" className="w-full flex justify-center sm:justify-start">
+      <form onSubmit={updateUserData} className="w-[300px] flex gap-y-4 flex-col">
         {fields.map((field) => {
           return (
             <div key={field.name}>
