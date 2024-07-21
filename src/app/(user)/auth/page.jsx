@@ -107,7 +107,8 @@ const Auth = () => {
   };
 
   return (
-    <section className="w-96 glassmorphism py-6 px-7 rounded-xl mx-auto mt-16 flex justify-center flex-col items-center">
+    <section className="w-full h-screen pb-16 overflow-x-hidden overflow-y-scroll">
+    <article className="w-[95%]  sm:w-96 glassmorphism py-6 px-7 rounded-xl mx-auto mt-8 sm:mt-16 flex justify-center flex-col items-center">
       <div className="w-full flex items-center justify-between mb-8">
         {step === 2 ? (
           <button
@@ -128,6 +129,7 @@ const Auth = () => {
       <div className="w-full flex justify-center items-center">
         {renderStep()}
       </div>
+    </article>
     </section>
   );
 };

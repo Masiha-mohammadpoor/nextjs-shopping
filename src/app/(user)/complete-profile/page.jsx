@@ -36,7 +36,8 @@ const CompleteProfile = () => {
   };
 
   return (
-    <section className="w-96 glassmorphism py-6 px-7 rounded-xl mx-auto mt-10 flex justify-center flex-col items-center">
+    <section className="w-full h-screen pb-20 overflow-x-hidden overflow-y-scroll">
+    <article className="w-[95%] sm:w-96 glassmorphism py-6 px-7 rounded-xl mx-auto mt-10 flex justify-center flex-col items-center">
       <div className="w-full flex items-center justify-center mb-8">
         <h1 className="text--white text-3xl font-bold">فرانت شاپ</h1>
       </div>
@@ -74,6 +75,7 @@ const CompleteProfile = () => {
           )}
         </button>
       </form>
+    </article>
     </section>
   );
 };
