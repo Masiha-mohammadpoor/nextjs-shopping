@@ -13,13 +13,13 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="fa" dir="rtl">
-      <body className={`${vazirFont.variable} font-sans`}>
+      <body className={`${vazirFont.variable} font-sans overflow-hidden`}>
         <Providers>
-          <main className="grid grid-cols-4 h-screen">
-          <section className="overflow-y-auto col-span-1"><SideBar/></section>
-          <section className="overflow-y-auto col-span-3">
+          <main className="grid grid-cols-4">
+          <SideBar/>
+          <section className="w-screen lg:w-full h-screen row-start-1 lg:row-start-auto col-span-4 lg:col-span-3 z-10">
             <Navigation/>
-            <div className="px-10 py-7">{children}</div>
+            <div className="w-full pb-20 h-screen overflow-y-scroll px-10 py-7">{children}</div>
           </section>
           </main>
         </Providers>
@@ -28,3 +28,4 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
+// overflow-y-auto  lg:col-span-3 col-span-4 row-start-1 md:w-auto z-20

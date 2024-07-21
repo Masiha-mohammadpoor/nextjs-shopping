@@ -15,7 +15,8 @@ const SideBar = () => {
     }
   }
   return (
-    <article className="h-full py-4 glassmorphism">
+    <section className="transition-all duration-300 relative lg:right-0 -right-80 lg:static lg:col-span-1 col-span-4 row-start-1 w-[250px] lg:w-auto h-screen lg:row-start-auto z-50 pb-20">
+    <article className="py-4 glassmorphism h-screen">
       <div className="px-6 flex items-center mb-10">
         <Image src="/icon.png" alt="فرانت شاپ" width={40} height={40} className="ml-3"/>
         <h1 className="text--white text-2xl font-bold">فرانت شاپ</h1>
@@ -28,6 +29,7 @@ const SideBar = () => {
       <li onClick={logoutHandler} className="cursor-pointer text-error rounded-l-full py-2 mb-3 pr-5 w-full transition-all duration-300 hover:glassmorphism">خروج</li>
       </ul>
     </article>
+    </section>
   );
 }
  
