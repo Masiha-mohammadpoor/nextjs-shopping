@@ -9,22 +9,18 @@ export const tableHeads = [
   },
   {
     id : 3,
-    label : "توضیحات"
-  },
-  {
-    id : 4,
     label : "محصولات"
   },
   {
-    id : 5,
+    id : 4,
     label : "مبلغ"
   },
   {
-    id : 6,
+    id : 5,
     label : "تاریخ"
   },
   {
-    id : 7,
+    id : 6,
     label : "وضعیت"
   },
 ]
