@@ -1,10 +1,15 @@
 "use client"
+import useProfileMenu from "@/hooks/useProfileMenu";
 import { logoutUser } from "@/services/authService";
 import Image from "next/image";
 import Link from "next/link";
 import toast from "react-hot-toast";
+import { IoClose } from "react-icons/io5";
+
 
 const SideBar = () => {
+
+  const {showMenu , setShowMenu} = useProfileMenu();
 
   const logoutHandler = async () => {
     try{
@@ -15,11 +20,14 @@ const SideBar = () => {
     }
   }
   return (
-    <section className="transition-all duration-300 relative lg:right-0 -right-80 lg:static lg:col-span-1 col-span-4 row-start-1 w-[250px] lg:w-auto h-screen lg:row-start-auto z-50 pb-20">
+    <section className={`transition-all duration-300 relative lg:right-0 ${showMenu ? "right-0" : "-right-80"} lg:static lg:col-span-1 col-span-4 row-start-1 w-[250px] lg:w-auto h-screen lg:row-start-auto z-50 pb-20`}>
     <article className="py-4 glassmorphism h-screen">
-      <div className="px-6 flex items-center mb-10">
+      <div className="px-6 flex items-center justify-between mb-10">
+        <div className="flex items-center">
         <Image src="/icon.png" alt="فرانت شاپ" width={40} height={40} className="ml-3"/>
-        <h1 className="text--white text-2xl font-bold">فرانت شاپ</h1>
+        <h1 className="text--white lg:text-2xl text-lg font-bold">فرانت شاپ</h1>
+        </div>
+        <button onClick={() => setShowMenu(!showMenu)} className="text--white"><IoClose size={25}/></button>
       </div>
       <ul className="pl-20">
       <Link href="/"><li className="rounded-l-full py-2 mb-3 pr-5 w-full transition-all duration-300 text--white hover:glassmorphism">صفحه اصلی</li></Link>

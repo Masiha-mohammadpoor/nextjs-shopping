@@ -72,19 +72,3 @@ const CartItems = ({ cart }) => {
 };
 
 export default CartItems;
-
-
-{/* <div>
-<p>{p.title}</p>
-<p>{toPersianNumberWithCommas(p.price)}</p>
-<p>{p.quantity} تعداد</p>
-</div>
-<div>
-<button onClick={() => incrementHandler(p._id)}>
-  <FaPlus />
-</button>
-<button onClick={() => decrementHandler(p._id)}>
-  <FaMinus />
-</button>
-</div> */}
-

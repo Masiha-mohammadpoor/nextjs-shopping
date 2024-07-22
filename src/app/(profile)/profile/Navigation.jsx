@@ -2,13 +2,20 @@
 import { MoonLoader } from "react-spinners";
 import useGetUser from "@/hooks/useAuth";
 import { toLoacalDate } from "@/utils/localDate";
+import { IoMenu } from "react-icons/io5";
+import useProfileMenu from "@/hooks/useProfileMenu";
+
 
 const Navigation = () => {
   const { data, isLoading } = useGetUser();
   const { user, cart } = data || {};
+  const {showMenu , setShowMenu} = useProfileMenu();
 
   return (
-    <nav className="w-full top-0 p-3 text--white glassmorphism">
+    <nav className="w-full top-0 p-3 text--white glassmorphism flex items-center gap-x-4">
+      <div>
+        <button onClick={() => setShowMenu(!showMenu)}><IoMenu size={25}/></button>
+      </div>
       <div>
         {isLoading ? (
           <MoonLoader color={"white"} loading={isLoading} size={30} />
@@ -23,7 +30,6 @@ const Navigation = () => {
           </>
         )}
       </div>
-      <div></div>
     </nav>
   );
 };

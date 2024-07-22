@@ -21,7 +21,7 @@ const Header = () => {
   const pathname = usePathname();
 
   return (
-      <headerr ref={ref} className="flex z-40 justify-between py-4 px-2 sm:p-4 sm:px-20 glassmorphism text--white">
+      <header ref={ref} className="flex z-40 shadow-lg justify-between py-4 px-2 sm:p-4 sm:px-20 glassmorphism text--white">
         <ul className="flex items-center justify-between gap-x-3 sm:gap-x-7">
           {pathname === "/products" && <li className="flex lg:hidden items-center">
             <button onClick={() => setShowMenu(!showMenu)}><IoMenu size={25}/></button>
@@ -68,7 +68,7 @@ const Header = () => {
         ) : (
           <div></div>
         )}
-      </headerr>
+      </header>
   );
 };
 
