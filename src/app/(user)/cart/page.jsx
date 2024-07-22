@@ -33,8 +33,9 @@ const Cart = () => {
   };
 
   return (
-    <section>
-      <article className="px-20 pt-10 grid grid-cols-3 gap-5">
+    <section className="h-screen overflow-y-auto pb-20">
+      <h1 className="sm:px-20 px-5 font-bold text-2xl text-white pt-10">سبد خرید</h1>
+      <article className="sm:px-20 px-5 pt-5 grid grid-cols-3 gap-5">
       {renderCartPage()}
       </article>
     </section>

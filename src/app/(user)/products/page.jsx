@@ -9,6 +9,7 @@ import { toStringCookies } from "@/utils/toStringCookies";
 import Image from "next/image";
 import { toPersianNumberWithCommas } from "@/utils/putCommaInNumber";
 import { toPersianDigits } from "@/utils/toPersianDigits";
+import Price from "@/components/Price";
 export const dynamic = "force-dynamic";
 
 const Products = async ({ searchParams }) => {
@@ -58,24 +59,7 @@ const Products = async ({ searchParams }) => {
                     مشاهده
                   </button>
                 </Link>
-                <div className="flex items-end flex-col">
-                  <div>
-                    {p.discount !== 0 && (
-                      <div className="w-24 px-1 flex items-center justify-between">
-                        <p className="line-through text--white text-xs">
-                          {toPersianNumberWithCommas(p.price)}
-                        </p>
-                        <span className="inline-block badge--error">
-                          {toPersianDigits(p.discount)}%
-                        </span>
-                      </div>
-                    )}
-                  </div>
-                  <p className="text--white flex items-end gap-x-0.5 text-sm font-bold">
-                    {toPersianNumberWithCommas(p.offPrice)}
-                    <span className="text-xs font-bold">تومان</span>
-                  </p>
-                </div>
+                <Price discount={p.discount} price={p.price} offPrice={p.offPrice}/>
               </div>
             </div>
           );
