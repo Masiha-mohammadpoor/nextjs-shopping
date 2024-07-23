@@ -12,8 +12,8 @@ const Navigation = () => {
   const {showMenu , setShowMenu} = useProfileMenu();
 
   return (
-    <nav className="w-full top-0 p-3 text--white glassmorphism flex items-center gap-x-4">
-      <div>
+    <nav className="shadow-lg w-full top-0 p-3 text--white glassmorphism flex items-center gap-x-4">
+      <div className="block lg:hidden">
         <button onClick={() => setShowMenu(!showMenu)}><IoMenu size={25}/></button>
       </div>
       <div>

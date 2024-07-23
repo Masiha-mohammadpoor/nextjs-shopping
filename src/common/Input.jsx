@@ -2,7 +2,7 @@
 
 import { toPersianDigits } from "@/utils/toPersianDigits";
 
-const Input = ({name , label , value , onChange}) => {
+const Input = ({name , label , value , onChange , disabled}) => {
   return (
     <>
       <label htmlFor={name} className="inline-block text-white mb-3 text-sm">
@@ -17,7 +17,7 @@ const Input = ({name , label , value , onChange}) => {
         onChange={onChange}
         autoComplete="off"
         className="textField__input"
-        
+        disabled={disabled}
       />
     </>
   );

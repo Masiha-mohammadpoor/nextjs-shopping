@@ -27,7 +27,7 @@ const SideBar = () => {
         <Image src="/icon.png" alt="فرانت شاپ" width={40} height={40} className="ml-3"/>
         <h1 className="text--white lg:text-2xl text-lg font-bold">فرانت شاپ</h1>
         </div>
-        <button onClick={() => setShowMenu(!showMenu)} className="text--white"><IoClose size={25}/></button>
+        <button onClick={() => setShowMenu(!showMenu)} className="text--white lg:hidden"><IoClose size={25}/></button>
       </div>
       <ul className="pl-20">
       <Link href="/"><li className="rounded-l-full py-2 mb-3 pr-5 w-full transition-all duration-300 text--white hover:glassmorphism">صفحه اصلی</li></Link>

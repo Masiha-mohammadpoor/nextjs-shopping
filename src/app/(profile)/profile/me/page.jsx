@@ -60,7 +60,6 @@ const Me = () => {
       name: "phoneNumber",
       label: "شماره موبایل",
       value: phoneNumber,
-      onChange: formChangeHandler,
     },
     {
       name: "biography",
@@ -84,10 +83,14 @@ const Me = () => {
   return (
     <div dir="rtl" className="w-full flex justify-center lg:justify-start">
       <form onSubmit={updateUserData} className="w-[300px] flex gap-y-4 flex-col">
+        <div>
+          <h1 className="text--white text-lg font-bold mb-1">اطلاعات کاربری</h1>
+          <p className="text-sm text--white">شماره تلفن قابل ویرایش نیست !</p>
+        </div>
         {fields.map((field) => {
           return (
             <div key={field.name}>
-              <Input {...field} value={toPersianDigits(field.value)} />
+              <Input disabled={field.name === "phoneNumber" ? true : false} {...field} value={toPersianDigits(field.value)} />
             </div>
           );
         })}
