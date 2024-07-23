@@ -8,13 +8,12 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
 const AddToCart = ({ product }) => {
-
-  const queryClient = useQueryClient()
+  const queryClient = useQueryClient();
   const router = useRouter();
   const { data } = useGetUser();
   const { isPending, mutateAsync } = useAddToCart();
-  const { user , cart} = data || {};
-  console.log(cart)
+  const { user, cart } = data || {};
+  console.log(cart);
 
   const addToCartHandler = async () => {
     if (!user) {
@@ -31,16 +30,22 @@ const AddToCart = ({ product }) => {
     }
   };
 
-  const isInCart = (user , product) => {
-    if(!user) return false;
-    return user?.cart?.products.some((p) => p.productId === product._id)
-  }
+  const isInCart = (user, product) => {
+    if (!user) return false;
+    return user?.cart?.products.some((p) => p.productId === product._id);
+  };
 
-  console.log(isInCart(user , product))
+  console.log(isInCart(user, product));
 
   return (
     <div>
-      {!isInCart(user , product) ? <button onClick={addToCartHandler}>افزودن به سبد خرید</button> : <Link href="/cart">ادامه سفارش</Link>}
+      {!isInCart(user, product) ? (
+        <button onClick={addToCartHandler} className="w-full rounded-md glassmorphism p-2 text--white transition-all duration-300 hover:bg-blue-700">افزودن به سبد خرید</button>
+      ) : (
+        <Link href="/cart">
+          <button className="w-full rounded-md p-2 text--white border-2 border-white transition-all duration-300 hover:bg-white hover:text-blue-700">ادامه سفارش</button>
+        </Link>
+      )}
     </div>
   );
 };

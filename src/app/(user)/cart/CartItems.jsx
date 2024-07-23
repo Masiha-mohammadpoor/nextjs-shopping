@@ -41,7 +41,6 @@ const CartItems = ({ cart }) => {
   return (
     <div className="lg:col-span-2 col-span-3">
       {cart?.productDetail.map((p) => {
-        console.log(p)
         return (
           <div
             className="w-full text--white glassmorphism rounded-md mb-2 sm:p-3 p-1.5 md:pl-4 flex flex-col md:flex-row  justify-between items-center gap-y-4"
