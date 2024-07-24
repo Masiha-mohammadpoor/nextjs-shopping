@@ -23,3 +23,9 @@ export const updateUser = (data) => {
 export const logoutUser = (data) => {
   return http.post("/user/logout").then(({data}) => data.data);
 }
+
+// for admin
+
+export const getAllUser = () => {
+  return http.get("/admin/user/list").then(({data}) => data.data);
+}

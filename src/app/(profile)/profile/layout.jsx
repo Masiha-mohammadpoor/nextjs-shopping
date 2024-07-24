@@ -28,4 +28,3 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
-// overflow-y-auto  lg:col-span-3 col-span-4 row-start-1 md:w-auto z-20

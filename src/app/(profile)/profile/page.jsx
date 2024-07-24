@@ -21,7 +21,7 @@ const Profile = () => {
   return (
     <article className="w-full flex flex-col gap-y-8">
       {/* welcome */}
-      <div className="flex items-center w-full sm:w-2/3 p-3 text--white rounded-md glassmorphism">سلام {user?.name} ; خوش اومدی 🥰</div>
+      <div className="flex items-center w-full sm:w-2/3 p-3 text--white rounded-md glassmorphism text-xs sm:text-base">سلام {user?.name} ; خوش اومدی 🥰</div>
       {/* info */}
       <div className="flex flex-col gap-y-5">
         <h1 className="text--white text-xl font-bold">سوابق من</h1>
@@ -59,7 +59,7 @@ const Profile = () => {
       <div className="mt-14">
       <div className="w-full flex items-center justify-between">
         <h1 className="text--white text-xl font-bold">آخرین سفارش ها</h1>
-        <Link href="/profile/payment" className="text--white flex items-center gap-x-2"><MdArrowRightAlt size={20}/> همه سفارش ها</Link>
+        <Link href="/profile/payment" className="text--white flex items-center sm:gap-x-2 text-xs"><MdArrowRightAlt size={20}/> همه سفارش ها</Link>
       </div>
       <div className="shadow-sm overflow-auto my-4">
       <table className="text--white border-collapse table-auto w-full min-w-[800px] text-sm">

@@ -9,6 +9,6 @@ export const useAddToCart = () =>
 export const useDecrementFromCart = () =>
   useMutation({
     mutationFn: decrementFromCart,
-  });
+});
 
 

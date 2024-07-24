@@ -3,8 +3,6 @@ import useGetUser from "@/hooks/useAuth";
 import { toPersianDigits } from "@/utils/toPersianDigits";
 import Link from "next/link";
 import { FiUser } from "react-icons/fi";
-import { TiArrowSortedDown } from "react-icons/ti";
-import useComponentVisible from "@/hooks/useComponentVisible";
 import { IoMenu } from "react-icons/io5";
 import useMenu from "@/hooks/useMenu";
 import { MdOutlineShoppingCart } from "react-icons/md";
@@ -14,14 +12,13 @@ import { usePathname } from "next/navigation";
 
 const Header = () => {
 
-  const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false);
   const { data, isLoading } = useGetUser();
   const { user, cart } = data || {};
   const {showMenu,setShowMenu} = useMenu();
   const pathname = usePathname();
 
   return (
-      <header ref={ref} className="flex shadow-lg justify-between py-4 px-2 sm:p-4 sm:px-20 glassmorphism text--white">
+      <header className="flex shadow-lg justify-between py-4 px-2 sm:p-4 sm:px-20 glassmorphism text--white">
         <ul className="flex items-center justify-between gap-x-3 sm:gap-x-7">
           {pathname === "/products" && <li className="flex lg:hidden items-center">
             <button onClick={() => setShowMenu(!showMenu)}><IoMenu size={25}/></button>
