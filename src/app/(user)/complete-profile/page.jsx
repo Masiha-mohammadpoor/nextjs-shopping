@@ -6,6 +6,7 @@ import { useMutation } from "@tanstack/react-query";
 import { completeProfile } from "@/services/authService";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import Loading from "@/components/Loading";
 
 const CompleteProfile = () => {
   const router = useRouter();
@@ -69,7 +70,7 @@ const CompleteProfile = () => {
           className="mt-7 flex justify-center items-center transition-all duration-500 w-44 glassmorphism rounded-xl p-2 text--white hover:bg-blue-700"
         >
           {isPending ? (
-            <BeatLoader color={"#ffffff"} loading={isPending} size={10} />
+            <Loading size={10}/>
           ) : (
             "ورود"
           )}

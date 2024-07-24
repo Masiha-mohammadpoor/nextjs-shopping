@@ -3,6 +3,7 @@ import { toPersianDigits } from "@/utils/toPersianDigits";
 import OtpInput from "react-otp-input";
 import { BeatLoader } from "react-spinners";
 import { CiEdit } from "react-icons/ci";
+import Loading from "@/components/Loading";
 
 const CheckOtpForm = ({
   label,
@@ -67,11 +68,7 @@ const CheckOtpForm = ({
         className="mt-7 flex justify-center items-center transition-all duration-500 w-44 glassmorphism rounded-xl p-2 text--white hover:bg-blue-700"
       >
         {checkOtpLoading ? (
-          <BeatLoader
-            color={"#ffffff"}
-            loading={checkOtpLoading}
-            size={10}
-          />
+          <Loading size={10}/>
         ) : (
           "ورود"
         )}

@@ -8,10 +8,11 @@ import { useEffect, useState } from "react";
 import { BeatLoader } from "react-spinners";
 import { updateUser } from "@/services/authService";
 import toast from "react-hot-toast";
+import Loading from "@/components/Loading";
 
 const Me = () => {
   const { data, isLoading } = useGetUser();
-  const { user, cart } = data || {};
+  const { user } = data || {};
 
   const { isPending , mutateAsync} = useMutation({
     mutationFn : updateUser
@@ -82,6 +83,9 @@ const Me = () => {
 
   return (
     <div dir="rtl" className="w-full flex justify-center lg:justify-start">
+      {isLoading ? <div className="mt-28 w-full flex justify-center items-center">
+        <Loading size={15}/>
+      </div> :
       <form onSubmit={updateUserData} className="w-[300px] flex gap-y-4 flex-col">
         <div>
           <h1 className="text--white text-lg font-bold mb-1">اطلاعات کاربری</h1>
@@ -99,17 +103,13 @@ const Me = () => {
         className="mt-7 flex justify-center items-center transition-all duration-500 w-44 glassmorphism rounded-xl p-2 text--white hover:bg-blue-700"
       >
         {isPending ? (
-          <BeatLoader
-            color={"#ffffff"}
-            loading={isPending}
-            size={10}
-          />
+          <Loading size={10}/>
         ) : (
           "به روز رسانی"
         )}
         </button>
 
-      </form>
+      </form>}
     </div>
   );
 };

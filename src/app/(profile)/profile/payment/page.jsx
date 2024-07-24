@@ -1,4 +1,5 @@
 "use client";
+import Loading from "@/components/Loading";
 import { tableHeads } from "@/constants/tableHeads";
 import useGetUser from "@/hooks/useAuth";
 import { toLoacalDate } from "@/utils/localDate";
@@ -13,8 +14,14 @@ const Payment = () => {
 
   
   return (
+    <>
+    {isLoading ? 
+      <div className="flex justify-center items-center mt-20">
+        <Loading size={15}/>
+      </div>
+    :
     <section>
-          <div className="shadow-sm overflow-auto my-8">
+      <div className="shadow-sm overflow-auto my-8">
       <table className="text--white border-collapse table-auto w-full min-w-[800px] text-sm">
         <thead>
           <tr>
@@ -68,8 +75,9 @@ const Payment = () => {
         </tbody>
       </table>
     </div>
-
     </section>
+    }
+    </>
   );
 }
  
