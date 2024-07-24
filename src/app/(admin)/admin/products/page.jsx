@@ -1,6 +1,7 @@
 "use client";
 import Loading from "@/components/Loading";
-import { userTableHeads } from "@/constants/tableHeads";
+import { productTableHeads } from "@/constants/tableHeads";
+import useGetProducts from "@/hooks/useGetProducts";
 import useGetUsers from "@/hooks/useGetUsers";
 import { toLoacalDate } from "@/utils/localDate";
 import { toPersianNumberWithCommas } from "@/utils/putCommaInNumber";
@@ -8,8 +9,8 @@ import { toPersianDigits } from "@/utils/toPersianDigits";
 import { FaCircleCheck } from "react-icons/fa6";
 
 const Users = () => {
-  const { data, isLoading } = useGetUsers();
-  const { users } = data || {};
+  const { data, isLoading } = useGetProducts();
+  const { products } = data || {};
 
   return (
     <>
@@ -20,13 +21,13 @@ const Users = () => {
       ) : (
         <section>
           <h1 className="text--white text-lg font-bold mb-1">
-            اطلاعات کاربران
+            محصولات
           </h1>
           <div className="shadow-sm overflow-auto my-8">
             <table className="text--white border-collapse table-auto w-full min-w-[800px] text-sm">
               <thead>
                 <tr>
-                  {userTableHeads.map((item) => {
+                  {productTableHeads.map((item) => {
                     return (
                       <th
                         className="whitespace-nowrap table__th text-center"
@@ -39,37 +40,29 @@ const Users = () => {
                 </tr>
               </thead>
               <tbody>
-                {users?.map((user, index) => {
+                {products?.map((product, index) => {
                   return (
-                    <tr key={user._id}>
+                    <tr key={product._id}>
                       <td className="table__td font-bold text-lg">
                         {toPersianDigits(index + 1)}
                       </td>
                       <td className="table__td  whitespace-nowrap truncate">
-                        {user?.name}
+                        {product?.title}
                       </td>
                       <td className="table__td  whitespace-nowrap truncate">
-                        {user?.email}
+                        {product?.category?.title}
                       </td>
                       <td className="table__td  whitespace-nowrap truncate">
-                        <span className="flex items-center gap-x-2">
-                          <span>{toPersianDigits(user?.phoneNumber)}</span>
-                          <FaCircleCheck className="text-success" />
-                        </span>
+                        {`${toPersianNumberWithCommas(product?.price)} تومان`}
                       </td>
-                      <td className="table__td">
-                        <div className="flex flex-col gap-y-2 items-start">
-                          {user.Products.map((product, index) => {
-                            return (
-                              <span className="badge bg-blue-700" key={index}>
-                                {product.title}
-                              </span>
-                            );
-                          })}
-                        </div>
+                      <td className="table__td  whitespace-nowrap truncate text-error font-bold text-lg">
+                        {`% ${toPersianNumberWithCommas(product?.discount)} -`}
                       </td>
-                      <td className="table__td">
-                        {toLoacalDate(user.createdAt)}
+                      <td className="table__td  whitespace-nowrap truncate">
+                        {`${toPersianNumberWithCommas(product?.offPrice)} تومان`}
+                      </td>
+                      <td className="table__td  whitespace-nowrap truncate">
+                        {toPersianNumberWithCommas(product?.countInStock)}
                       </td>
                     </tr>
                   );
