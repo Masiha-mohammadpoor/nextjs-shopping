@@ -2,11 +2,8 @@
 import Loading from "@/components/Loading";
 import { productTableHeads } from "@/constants/tableHeads";
 import useGetProducts from "@/hooks/useGetProducts";
-import useGetUsers from "@/hooks/useGetUsers";
-import { toLoacalDate } from "@/utils/localDate";
 import { toPersianNumberWithCommas } from "@/utils/putCommaInNumber";
 import { toPersianDigits } from "@/utils/toPersianDigits";
-import { FaCircleCheck } from "react-icons/fa6";
 
 const Users = () => {
   const { data, isLoading } = useGetProducts();
