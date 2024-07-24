@@ -21,6 +21,7 @@ const Payment = () => {
       </div>
     :
     <section>
+      <h1 className="text--white text-lg font-bold mb-1">سفارشات من</h1>
       <div className="shadow-sm overflow-auto my-8">
       <table className="text--white border-collapse table-auto w-full min-w-[800px] text-sm">
         <thead>

@@ -1,35 +1,42 @@
-"use client"
-import { MoonLoader } from "react-spinners";
+"use client";
 import useGetUser from "@/hooks/useAuth";
-import { toLoacalDate } from "@/utils/localDate";
 import { IoMenu } from "react-icons/io5";
 import useProfileMenu from "@/hooks/useProfileMenu";
-
+import Link from "next/link";
+import { MdOutlineShoppingCart } from "react-icons/md";
+import { FiUser } from "react-icons/fi";
+import { toPersianDigits } from "@/utils/toPersianDigits";
+import Loading from "@/components/Loading";
 
 const Navigation = () => {
   const { data, isLoading } = useGetUser();
-  const { user, cart } = data || {};
-  const {showMenu , setShowMenu} = useProfileMenu();
+  const { cart } = data || {};
+  const { showMenu, setShowMenu } = useProfileMenu();
 
   return (
-    <nav className="shadow-lg w-full top-0 p-3 text--white glassmorphism flex items-center gap-x-4">
-      <div className="block lg:hidden">
-        <button onClick={() => setShowMenu(!showMenu)}><IoMenu size={25}/></button>
-      </div>
+    <nav className="shadow-lg w-full top-0 p-3 py-4 sm:px-20 text--white glassmorphism flex items-center justify-between">
       <div>
-        {isLoading ? (
-          <MoonLoader color={"white"} loading={isLoading} size={30} />
-        ) : (
-          <>
-            <p className="text--white text-sm">
-              سلام {user?.name} خوش اومدی 🥰
-            </p>
-            <p className="text--white text-sm">
-              تاریخ پیوستن : {toLoacalDate(user.createdAt)}
-            </p>
-          </>
-        )}
+        <div className="block lg:hidden">
+          <button onClick={() => setShowMenu(!showMenu)}>
+            <IoMenu size={25} />
+          </button>
+        </div>
       </div>
+      {isLoading ? <Loading size={10}/> :<div className="flex items-center gap-x-2 sm:gap-x-8 p-0 z-50">
+        <Link href="/cart">
+          <button className="w-10 h-7 pt-1 relative flex justify-center">
+            <MdOutlineShoppingCart size={23} />
+            <span className="absolute badge--error -top-1.5 -right-1.5">
+              {toPersianDigits(cart?.productDetail?.length)}
+            </span>
+          </button>
+        </Link>
+        <Link href="/profile">
+          <button className="w-10 h-7 pt-1 flex justify-center items-center">
+            <FiUser size={25} />
+          </button>
+        </Link>
+      </div>}
     </nav>
   );
 };
