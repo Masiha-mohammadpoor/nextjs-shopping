@@ -1,19 +1,20 @@
 "use client";
 import Select from "react-select";
 
-const SelectOption = ({onChnage , options , label , value}) => {
+const SelectOption = ({onChnage , options , defaultValue}) => {
   return (
     <Select
       onChange={onChnage}
       options={options}
-      getOptionLabel={(option) => option[label]}
-      getOptionValue={(option) => option[value]}
+      defaultValue={defaultValue}
+      menuPlacement="top"
       placeholder="انتخاب کنید ..."
       styles={{
         container: (baseStyles, state) => ({
           ...baseStyles,
           border: 0,
           outline: 0,
+          position : "relative"
         }),
         dropdownIndicator: (baseStyles, state) => ({
           ...baseStyles,
@@ -48,7 +49,12 @@ const SelectOption = ({onChnage , options , label , value}) => {
           ...baseStyles,
           color: "#fff",
           backgroundColor: "#ffffff33",
+          maxHeight : "130px",
+          overflowY : "auto",
           backdropFilter: "blur(16px)",
+          position : "absolute",
+          zIndex : 60
+
         }),
         option: (baseStyles, state) => ({
           ...baseStyles,

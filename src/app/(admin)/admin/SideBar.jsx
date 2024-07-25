@@ -22,7 +22,7 @@ const SideBar = () => {
     }
   }
   return (
-    <section className={`transition-all duration-300 relative lg:right-0 ${showMenu ? "right-0" : "-right-80"} lg:static lg:col-span-1 col-span-4 row-start-1 w-[250px] lg:w-auto h-screen lg:row-start-auto z-50 pb-20`}>
+    <section className={`transition-all duration-300 relative lg:right-0 ${showMenu ? "right-0" : "-right-80"} lg:static lg:col-span-1 col-span-4 row-start-1 w-[250px] lg:w-auto h-screen lg:row-start-auto z-50 pb-20 mb-0`}>
     <article className="py-4 glassmorphism h-screen overflow-y-auto">
       <div className="px-6 flex items-center justify-between mb-10">
         <div className="flex items-center">

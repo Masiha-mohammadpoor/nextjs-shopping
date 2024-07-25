@@ -12,9 +12,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="fa" dir="rtl">
-      <body className={`${vazirFont.variable} font-sans overflow-hidden`}>
+      <body className={`${vazirFont.variable} font-sans overflow-hidden relative bottom-0`}>
         <Providers>
-          <main className="grid grid-cols-4">
+          <main className="grid grid-cols-4 mb-0">
           <SideBar/>
           <section className="w-screen lg:w-full h-screen row-start-1 lg:row-start-auto col-span-4 lg:col-span-3 z-10">
             <Navigation/>

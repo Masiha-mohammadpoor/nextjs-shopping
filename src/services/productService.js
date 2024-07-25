@@ -15,3 +15,10 @@ export const getSingleProduct = (slug) => {
 export const likeProduct = (id) => {
   return http.post(`/product/like/${id}`).then(({data}) => data.data);
 }
+
+// for admin
+
+export const addProduct = (product) => {
+  return http.post("/admin/product/add" , product).then(({data}) => data.data);
+}
+

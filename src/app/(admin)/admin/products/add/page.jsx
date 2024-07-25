@@ -2,15 +2,19 @@
 import Input from "@/common/Input";
 import SelectOption from "@/common/Select";
 import Loading from "@/components/Loading";
+import { useAddProduct } from "@/hooks/useAddProduct";
 import useGetCategories from "@/hooks/useGetCategories";
 import { toEnglishDigits } from "@/utils/toEnglishDigits";
 import { toPersianDigits } from "@/utils/toPersianDigits";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
-import Select from "react-select";
+import toast from "react-hot-toast";
 import { TagsInput } from "react-tag-input-component";
 
 const AddProduct = () => {
-  const [category, setCategory] = useState(null);
+
+  const router = useRouter();
+  const [category, setCategory] = useState({label : "" , value : ""});
   const [tags, setTags] = useState([]);
   const [formData, setFormData] = useState({
     title: "",
@@ -24,8 +28,11 @@ const AddProduct = () => {
     imageLink: "",
   });
 
+  const { isPending, mutateAsync } = useAddProduct();
   const { data, isLoading } = useGetCategories();
   const { categories } = data || {};
+  let options = [];
+  categories && categories.map(c => options = [...options , {label : c.title , value : c._id}]);
 
   const {
     title,
@@ -79,7 +86,7 @@ const AddProduct = () => {
     },
     {
       name: "discount",
-      label: "تخفیف",
+      label: "تخفیف (درصد)",
       value: discount,
       onChange: formChangeHandler,
     },
@@ -103,8 +110,15 @@ const AddProduct = () => {
     },
   ];
 
-  const addNewProduct = (e) => {
+  const addNewProduct = async (e) => {
     e.preventDefault();
+    try {
+      const {message} = await mutateAsync({...formData , category : category.value , tags})
+      toast.success(message);
+      router.push("/admin/products");
+    }catch(err){
+      toast.error(err?.response?.data?.message);
+    }
   };
 
   return (
@@ -133,6 +147,19 @@ const AddProduct = () => {
           {/* tags input */}
           <div>
             <label className="inline-block text-white mb-3 text-sm">
+              دسته بندی
+            </label>
+            <SelectOption
+              defaultValue={category}
+              onChnage={setCategory}
+              options={options}
+              // label="title"
+              // value="_id"
+            />
+          </div>
+          {/* react select */}
+          <div>
+            <label className="inline-block text-white mb-3 text-sm">
               تگ ها
             </label>
             <TagsInput
@@ -145,23 +172,11 @@ const AddProduct = () => {
               }}
             />
           </div>
-          {/* react select */}
-          <div>
-            <label className="inline-block text-white mb-3 text-sm">
-              دسته بندی
-            </label>
-            <SelectOption
-              onChnage={setCategory}
-              options={categories}
-              label="title"
-              value="_id"
-            />
-          </div>
           <button
             type="submit"
             className="mt-7 flex justify-center items-center transition-all duration-500 w-44 glassmorphism rounded-xl p-2 text--white hover:bg-blue-700"
           >
-            {false ? <Loading size={10} /> : "افزودن محصول"}
+            {isPending ? <Loading size={10} /> : "افزودن محصول"}
           </button>
         </form>
       )}
