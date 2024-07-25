@@ -1,6 +1,7 @@
 "use client";
 import Input from "@/common/Input";
 import SelectOption from "@/common/Select";
+import Form from "@/components/Form";
 import Loading from "@/components/Loading";
 import { useUpdateProduct } from "@/hooks/useAddProduct";
 import useGetCategories from "@/hooks/useGetCategories";
@@ -11,7 +12,6 @@ import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { TagsInput } from "react-tag-input-component";
-
 
 const fields = [
   {
@@ -52,12 +52,10 @@ const fields = [
   },
 ];
 
-
 const EditProduct = () => {
-
   const params = useParams();
   const router = useRouter();
-  const {isPending , mutateAsync} = useUpdateProduct()
+  const { isPending, mutateAsync } = useUpdateProduct();
   const [category, setCategory] = useState(null);
   const [tags, setTags] = useState([]);
   const [formData, setFormData] = useState({
@@ -72,13 +70,15 @@ const EditProduct = () => {
     imageLink: "",
   });
 
-  const {data : editdProduct, isLoading : productLoading} = useGetProductById(params.id);
-  const {product} = editdProduct || {};
+  const { data: editdProduct, isLoading: productLoading } = useGetProductById(
+    params.id
+  );
+  const { product } = editdProduct || {};
   const { data, isLoading } = useGetCategories();
   const { categories } = data || {};
 
   useEffect(() => {
-    if(product){
+    if (product) {
       setFormData({
         title: product.title,
         description: product.description,
@@ -88,12 +88,12 @@ const EditProduct = () => {
         discount: product.discount || 0,
         offPrice: product.offPrice,
         countInStock: product.countInStock,
-        imageLink: product.imageLink,  
-      })
+        imageLink: product.imageLink,
+      });
       setTags(product.tags);
-      setCategory(product.category)
+      setCategory(product.category);
     }
-  } , [product])
+  }, [product]);
 
   const formChangeHandler = (e) => {
     setFormData({
@@ -102,18 +102,20 @@ const EditProduct = () => {
     });
   };
 
-
   const updateProduct = async (e) => {
     e.preventDefault();
     try {
-      const {message} = await mutateAsync({id : product._id , editedProduct : {
-        ...formData,
-        category : category._id,
-        tags
-      }})
+      const { message } = await mutateAsync({
+        id: product._id,
+        editedProduct: {
+          ...formData,
+          category: category._id,
+          tags,
+        },
+      });
       toast.success(message);
-      router.push("/admin/products")
-    }catch(err){
+      router.push("/admin/products");
+    } catch (err) {
       toast.error(err?.response?.data?.message);
     }
   };
@@ -125,58 +127,20 @@ const EditProduct = () => {
           <Loading size={15} />
         </div>
       ) : (
-        <form
+        <Form
           onSubmit={updateProduct}
-          className="w-[300px] flex gap-y-4 flex-col"
-        >
-          <h1 className="text--white text-lg font-bold mb-1">ویرایش محصول</h1>
-          {fields.map((field) => {
-            return (
-              <div key={field.name}>
-                <Input
-                  label={field.label}
-                  name={field.name}
-                  onChange={formChangeHandler}
-                  value={toPersianDigits(formData[field.name])}
-                  disabled={false}
-                />
-              </div>
-            );
-          })}
-          {/* tags input */}
-          <div>
-            <label className="inline-block text-white mb-3 text-sm">
-              دسته بندی
-            </label>
-            <SelectOption
-            defaultValue={category}
-              value={category}
-              onChange={setCategory}
-              options={categories}
-            />
-          </div>
-          {/* react select */}
-          <div>
-            <label className="inline-block text-white mb-3 text-sm">
-              تگ ها
-            </label>
-            <TagsInput
-              value={tags}
-              onChange={setTags}
-              name="tags"
-              classNames={{
-                input: "bg-transparent focus:border-none text--white",
-                tag: "text--white",
-              }}
-            />
-          </div>
-          <button
-            type="submit"
-            className="mt-7 flex justify-center items-center transition-all duration-500 w-44 glassmorphism rounded-xl p-2 text--white hover:bg-blue-700"
-          >
-            {isPending ? <Loading size={10} /> : "ویرایش محصول"}
-          </button>
-        </form>
+          title="ویرایش محصول"
+          fields={fields}
+          formChangeHandler={formChangeHandler}
+          formData={formData}
+          category={category}
+          setCategory={setCategory}
+          categories={categories}
+          tags={tags}
+          setTags={setTags}
+          isPending={isPending}
+          btnText="ویرایش محصول"
+        />
       )}
     </div>
   );

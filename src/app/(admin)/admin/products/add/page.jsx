@@ -1,6 +1,7 @@
 "use client";
 import Input from "@/common/Input";
 import SelectOption from "@/common/Select";
+import Form from "@/components/Form";
 import Loading from "@/components/Loading";
 import { useAddProduct } from "@/hooks/useAddProduct";
 import useGetCategories from "@/hooks/useGetCategories";
@@ -51,7 +52,6 @@ const fields = [
 ];
 
 const AddProduct = () => {
-
   const router = useRouter();
   const [category, setCategory] = useState(null);
   const [tags, setTags] = useState([]);
@@ -71,7 +71,6 @@ const AddProduct = () => {
   const { data, isLoading } = useGetCategories();
   const { categories } = data || {};
 
-  
   const formChangeHandler = (e) => {
     setFormData({
       ...formData,
@@ -79,14 +78,17 @@ const AddProduct = () => {
     });
   };
 
-
   const addNewProduct = async (e) => {
     e.preventDefault();
     try {
-      const {message} = await mutateAsync({...formData , category : category._id , tags})
+      const { message } = await mutateAsync({
+        ...formData,
+        category: category._id,
+        tags,
+      });
       toast.success(message);
       router.push("/admin/products");
-    }catch(err){
+    } catch (err) {
       toast.error(err?.response?.data?.message);
     }
   };
@@ -98,58 +100,20 @@ const AddProduct = () => {
           <Loading size={15} />
         </div>
       ) : (
-        <form
+        <Form
           onSubmit={addNewProduct}
-          className="w-[300px] flex gap-y-4 flex-col"
-        >
-          <h1 className="text--white text-lg font-bold mb-1">افزودن محصول</h1>
-          {fields.map((field) => {
-            return (
-              <div key={field.name}>
-                <Input
-                  label={field.label}
-                  name={field.name}
-                  onChange={formChangeHandler}
-                  value={toPersianDigits(formData[field.name])}
-                  disabled={false}
-                />
-              </div>
-            );
-          })}
-          {/* tags input */}
-          <div>
-            <label className="inline-block text-white mb-3 text-sm">
-              دسته بندی
-            </label>
-            <SelectOption
-              defaultValue={category}
-              value={category}
-              onChange={setCategory}
-              options={categories}
-            />
-          </div>
-          {/* react select */}
-          <div>
-            <label className="inline-block text-white mb-3 text-sm">
-              تگ ها
-            </label>
-            <TagsInput
-              value={tags}
-              onChange={setTags}
-              name="tags"
-              classNames={{
-                input: "bg-transparent focus:border-none text--white",
-                tag: "text--white",
-              }}
-            />
-          </div>
-          <button
-            type="submit"
-            className="mt-7 flex justify-center items-center transition-all duration-500 w-44 glassmorphism rounded-xl p-2 text--white hover:bg-blue-700"
-          >
-            {isPending ? <Loading size={10} /> : "افزودن محصول"}
-          </button>
-        </form>
+          title="افزودن محصول"
+          fields={fields}
+          formChangeHandler={formChangeHandler}
+          formData={formData}
+          category={category}
+          setCategory={setCategory}
+          categories={categories}
+          tags={tags}
+          setTags={setTags}
+          isPending={isPending}
+          btnText="افزودن محصول"
+        />
       )}
     </div>
   );
