@@ -1,4 +1,4 @@
-import { addProduct } from "@/services/productService";
+import { addProduct, updateProduct } from "@/services/productService";
 import { useMutation } from "@tanstack/react-query";
 
 export const useAddProduct = () =>
@@ -6,3 +6,7 @@ export const useAddProduct = () =>
     mutationFn: addProduct,
   });
 
+export const useUpdateProduct = () =>
+  useMutation({
+    mutationFn: updateProduct,
+  });

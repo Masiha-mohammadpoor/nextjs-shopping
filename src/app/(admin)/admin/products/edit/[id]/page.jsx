@@ -2,14 +2,16 @@
 import Input from "@/common/Input";
 import SelectOption from "@/common/Select";
 import Loading from "@/components/Loading";
-import { useAddProduct } from "@/hooks/useAddProduct";
+import { useUpdateProduct } from "@/hooks/useAddProduct";
 import useGetCategories from "@/hooks/useGetCategories";
+import { useGetProductById } from "@/hooks/useGetProducts";
 import { toEnglishDigits } from "@/utils/toEnglishDigits";
 import { toPersianDigits } from "@/utils/toPersianDigits";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useParams, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { TagsInput } from "react-tag-input-component";
+
 
 const fields = [
   {
@@ -50,9 +52,12 @@ const fields = [
   },
 ];
 
-const AddProduct = () => {
 
+const EditProduct = () => {
+
+  const params = useParams();
   const router = useRouter();
+  const {isPending , mutateAsync} = useUpdateProduct()
   const [category, setCategory] = useState(null);
   const [tags, setTags] = useState([]);
   const [formData, setFormData] = useState({
@@ -67,11 +72,29 @@ const AddProduct = () => {
     imageLink: "",
   });
 
-  const { isPending, mutateAsync } = useAddProduct();
+  const {data : editdProduct, isLoading : productLoading} = useGetProductById(params.id);
+  const {product} = editdProduct || {};
   const { data, isLoading } = useGetCategories();
   const { categories } = data || {};
 
-  
+  useEffect(() => {
+    if(product){
+      setFormData({
+        title: product.title,
+        description: product.description,
+        slug: product.slug,
+        brand: product.brand,
+        price: product.price,
+        discount: product.discount || 0,
+        offPrice: product.offPrice,
+        countInStock: product.countInStock,
+        imageLink: product.imageLink,  
+      })
+      setTags(product.tags);
+      setCategory(product.category)
+    }
+  } , [product])
+
   const formChangeHandler = (e) => {
     setFormData({
       ...formData,
@@ -80,12 +103,16 @@ const AddProduct = () => {
   };
 
 
-  const addNewProduct = async (e) => {
+  const updateProduct = async (e) => {
     e.preventDefault();
     try {
-      const {message} = await mutateAsync({...formData , category : category._id , tags})
+      const {message} = await mutateAsync({id : product._id , editedProduct : {
+        ...formData,
+        category : category._id,
+        tags
+      }})
       toast.success(message);
-      router.push("/admin/products");
+      router.push("/admin/products")
     }catch(err){
       toast.error(err?.response?.data?.message);
     }
@@ -93,16 +120,16 @@ const AddProduct = () => {
 
   return (
     <div dir="rtl" className="w-full flex justify-center lg:justify-start">
-      {isLoading ? (
+      {isLoading && productLoading ? (
         <div className="mt-28 w-full flex justify-center items-center">
           <Loading size={15} />
         </div>
       ) : (
         <form
-          onSubmit={addNewProduct}
+          onSubmit={updateProduct}
           className="w-[300px] flex gap-y-4 flex-col"
         >
-          <h1 className="text--white text-lg font-bold mb-1">افزودن محصول</h1>
+          <h1 className="text--white text-lg font-bold mb-1">ویرایش محصول</h1>
           {fields.map((field) => {
             return (
               <div key={field.name}>
@@ -122,7 +149,7 @@ const AddProduct = () => {
               دسته بندی
             </label>
             <SelectOption
-              defaultValue={category}
+            defaultValue={category}
               value={category}
               onChange={setCategory}
               options={categories}
@@ -147,7 +174,7 @@ const AddProduct = () => {
             type="submit"
             className="mt-7 flex justify-center items-center transition-all duration-500 w-44 glassmorphism rounded-xl p-2 text--white hover:bg-blue-700"
           >
-            {isPending ? <Loading size={10} /> : "افزودن محصول"}
+            {isPending ? <Loading size={10} /> : "ویرایش محصول"}
           </button>
         </form>
       )}
@@ -155,4 +182,4 @@ const AddProduct = () => {
   );
 };
 
-export default AddProduct;
+export default EditProduct;

@@ -81,4 +81,8 @@ export const productTableHeads = [
     id : 7,
     label : "موجودی"
   },
+  {
+    id : 8,
+    label : "عملیات"
+  },
 ]

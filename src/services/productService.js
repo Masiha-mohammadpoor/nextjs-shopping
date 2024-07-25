@@ -22,3 +22,11 @@ export const addProduct = (product) => {
   return http.post("/admin/product/add" , product).then(({data}) => data.data);
 }
 
+export const getProductById = (id) => {
+  return http.get(`/product/${id}`).then(({data}) => data.data);
+}
+
+export const updateProduct = ({id , editedProduct}) => {
+  return http.patch(`/admin/product/update/${id}` , editedProduct).then(({data}) => data.data);
+}
+

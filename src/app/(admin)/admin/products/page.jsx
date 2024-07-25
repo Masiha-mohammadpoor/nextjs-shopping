@@ -4,6 +4,10 @@ import { productTableHeads } from "@/constants/tableHeads";
 import useGetProducts from "@/hooks/useGetProducts";
 import { toPersianNumberWithCommas } from "@/utils/putCommaInNumber";
 import { toPersianDigits } from "@/utils/toPersianDigits";
+import Link from "next/link";
+import { BiEdit } from "react-icons/bi";
+import { FaTrashAlt } from "react-icons/fa";
+
 
 const Users = () => {
   const { data, isLoading } = useGetProducts();
@@ -60,6 +64,12 @@ const Users = () => {
                       </td>
                       <td className="table__td  whitespace-nowrap truncate">
                         {toPersianNumberWithCommas(product?.countInStock)}
+                      </td>
+                      <td className="table__td  whitespace-nowrap truncate">
+                        <div className="flex gap-x-2">
+                          <button><Link href={`/admin/products/edit/${product._id}`}><BiEdit className="text-lg text-success"/></Link></button>
+                          <button><FaTrashAlt className="text-lg text-error"/></button>
+                        </div>
                       </td>
                     </tr>
                   );

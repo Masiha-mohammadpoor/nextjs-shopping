@@ -1,13 +1,16 @@
 "use client";
 import Select from "react-select";
 
-const SelectOption = ({onChnage , options , defaultValue}) => {
+const SelectOption = ({onChange , options , value , defaultValue}) => {
   return (
     <Select
-      onChange={onChnage}
-      options={options}
+      onChange={onChange}
+      value={value}
       defaultValue={defaultValue}
-      menuPlacement="top"
+      getOptionLabel={(option) => option.title}
+      getOptionValue={(option) => option._id}
+      options={options}
+      menuPlacement="auto"
       placeholder="انتخاب کنید ..."
       styles={{
         container: (baseStyles, state) => ({
