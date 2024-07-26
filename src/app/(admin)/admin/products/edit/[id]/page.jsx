@@ -1,5 +1,5 @@
 "use client";
-import Form from "@/components/Form";
+import ProductForm from "@/components/ProductForm";
 import Loading from "@/components/Loading";
 import { useUpdateProduct } from "@/hooks/useAddProduct";
 import useGetCategories from "@/hooks/useGetCategories";
@@ -123,7 +123,7 @@ const EditProduct = () => {
           <Loading size={15} />
         </div>
       ) : (
-        <Form
+        <ProductForm
           onSubmit={updateProduct}
           title="ویرایش محصول"
           fields={fields}

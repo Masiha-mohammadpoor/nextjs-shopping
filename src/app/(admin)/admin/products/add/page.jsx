@@ -1,5 +1,5 @@
 "use client";
-import Form from "@/components/Form";
+import ProductForm from "@/components/ProductForm";
 import Loading from "@/components/Loading";
 import { useAddProduct } from "@/hooks/useAddProduct";
 import useGetCategories from "@/hooks/useGetCategories";
@@ -96,7 +96,7 @@ const AddProduct = () => {
           <Loading size={15} />
         </div>
       ) : (
-        <Form
+        <ProductForm
           onSubmit={addNewProduct}
           title="افزودن محصول"
           fields={fields}

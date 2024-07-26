@@ -4,7 +4,7 @@ import { TagsInput } from "react-tag-input-component";
 import Loading from "./Loading";
 import Input from "@/common/Input";
 
-const Form = ({
+const ProductForm = ({
   onSubmit,
   title,
   fields,
@@ -69,4 +69,4 @@ const Form = ({
   );
 };
 
-export default Form;
+export default ProductForm;
