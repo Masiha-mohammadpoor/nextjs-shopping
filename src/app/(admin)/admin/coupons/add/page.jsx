@@ -9,6 +9,7 @@ import Select from "react-select";
 import Radio from "@/common/Radio";
 import useGetProducts from "@/hooks/useGetProducts";
 import { toPersianDigits } from "@/utils/toPersianDigits";
+import { SelectStyles } from "@/constants/SelectStyles";
 
 const AddCoupon = () => {
   const router = useRouter();
@@ -105,6 +106,7 @@ const AddCoupon = () => {
               options={products}
               getOptionLabel={option => option.title}
               getOptionValue={option => option._id}
+              styles={SelectStyles}
             />
           </div>
           <button
