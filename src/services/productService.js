@@ -30,3 +30,6 @@ export const updateProduct = ({id , editedProduct}) => {
   return http.patch(`/admin/product/update/${id}` , editedProduct).then(({data}) => data.data);
 }
 
+export const removeProduct = (id) => {
+  return http.delete(`/admin/product/remove/${id}`).then(({data}) => data.data);
+}

@@ -1,16 +1,32 @@
 "use client";
 import Loading from "@/components/Loading";
 import { categoryTableHeads } from "@/constants/tableHeads";
+import { useRemoveCategories } from "@/hooks/useAddCategory";
 import useGetCategories from "@/hooks/useGetCategories";
 import { toPersianDigits } from "@/utils/toPersianDigits";
+import { useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
+import toast from "react-hot-toast";
 import { BiEdit } from "react-icons/bi";
 import { FaTrashAlt } from "react-icons/fa";
 
 
 const Categories = () => {
+  const {mutateAsync} = useRemoveCategories();
   const { data, isLoading } = useGetCategories();
   const { categories } = data || {};
+  const queryClient = useQueryClient()
+
+
+  const removeCategoryHandler = async (id) => {
+    try {
+      const {message} = await mutateAsync(id);
+      toast.success(message);
+      queryClient.invalidateQueries({queryKey : ["get-categories"]});
+    }catch(err){
+      toast.error(err?.response?.data?.message);
+    }
+  }
 
   return (
     <>
@@ -61,7 +77,7 @@ const Categories = () => {
                       <td className="table__td  whitespace-nowrap truncate">
                         <div className="flex gap-x-2">
                           <button><Link href={`/admin/categories/edit/${category._id}`}><BiEdit className="text-lg text-success"/></Link></button>
-                          <button><FaTrashAlt className="text-lg text-error"/></button>
+                          <button onClick={() => removeCategoryHandler(category._id)}><FaTrashAlt className="text-lg text-error"/></button>
                         </div>
                       </td>
                     </tr>

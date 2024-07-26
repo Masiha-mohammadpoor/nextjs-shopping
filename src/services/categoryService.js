@@ -19,3 +19,6 @@ export const updateCategory = ({id , editedCategory}) => {
   return http.patch(`/admin/category/update/${id}` , editedCategory).then(({data}) => data.data);
 }
 
+export const removeCategory = (id) => {
+  return http.delete(`/admin/category/remove/${id}`).then(({data}) => data.data);
+}

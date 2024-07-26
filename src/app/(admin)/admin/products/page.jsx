@@ -1,17 +1,33 @@
 "use client";
 import Loading from "@/components/Loading";
 import { productTableHeads } from "@/constants/tableHeads";
+import { useRemoveProduct } from "@/hooks/useAddProduct";
 import useGetProducts from "@/hooks/useGetProducts";
 import { toPersianNumberWithCommas } from "@/utils/putCommaInNumber";
 import { toPersianDigits } from "@/utils/toPersianDigits";
+import { useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
+import toast from "react-hot-toast";
 import { BiEdit } from "react-icons/bi";
 import { FaTrashAlt } from "react-icons/fa";
 
 
 const Products = () => {
+  const {mutateAsync} = useRemoveProduct();
   const { data, isLoading } = useGetProducts();
   const { products } = data || {};
+  const queryClient = useQueryClient()
+
+
+  const removeProductHandler = async (id) => {
+    try {
+      const {message} = await mutateAsync(id);
+      toast.success(message);
+      queryClient.invalidateQueries({queryKey : ["get-products"]});
+    }catch(err){
+      toast.error(err?.response?.data?.message);
+    }
+  }
 
   return (
     <>
@@ -68,7 +84,7 @@ const Products = () => {
                       <td className="table__td  whitespace-nowrap truncate">
                         <div className="flex gap-x-2">
                           <button><Link href={`/admin/products/edit/${product._id}`}><BiEdit className="text-lg text-success"/></Link></button>
-                          <button><FaTrashAlt className="text-lg text-error"/></button>
+                          <button onClick={() => removeProductHandler(product._id)}><FaTrashAlt className="text-lg text-error"/></button>
                         </div>
                       </td>
                     </tr>
