@@ -1,4 +1,5 @@
 "use client"
+import useGetUser from "@/hooks/useAuth";
 import useProfileMenu from "@/hooks/useProfileMenu";
 import { logoutUser } from "@/services/authService";
 import Image from "next/image";
@@ -10,6 +11,8 @@ import { IoClose } from "react-icons/io5";
 
 const SideBar = () => {
 
+  const {data , isLoading} = useGetUser();
+  const {user} = data || {}
   const {showMenu , setShowMenu} = useProfileMenu();
   const pathname = usePathname();
 
@@ -36,6 +39,7 @@ const SideBar = () => {
       <Link href="/profile"><li className={`${pathname === "/profile" ? "glassmorphism" : ""} rounded-l-full py-2 mb-3 pr-5 w-full transition-all duration-300 text--white hover:glassmorphism`}>داشبورد</li></Link>
       <Link href="/profile/me"><li className={`${pathname === "/profile/me" ? "glassmorphism" : ""} rounded-l-full py-2 mb-3 pr-5 w-full transition-all duration-300 text--white hover:glassmorphism`}>اطلاعات کاربری</li></Link>
       <Link href="/profile/payment"><li className={`${pathname === "/profile/payment" ? "glassmorphism" : ""} rounded-l-full py-2 mb-3 pr-5 w-full transition-all duration-300 text--white hover:glassmorphism`}>سفارشات من</li></Link>
+      {user && <Link href="/admin"><li className={`${pathname === "/admin" ? "glassmorphism" : ""} rounded-l-full py-2 mb-3 pr-5 w-full transition-all duration-300 text--white hover:glassmorphism`}>پنل ادمین</li></Link>}
       <li onClick={logoutHandler} className="cursor-pointer text-error rounded-l-full py-2 mb-3 pr-5 w-full transition-all duration-300 hover:glassmorphism">خروج</li>
       </ul>
     </article>

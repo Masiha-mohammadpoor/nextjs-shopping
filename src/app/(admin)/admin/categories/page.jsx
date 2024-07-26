@@ -1,17 +1,16 @@
 "use client";
 import Loading from "@/components/Loading";
-import { productTableHeads } from "@/constants/tableHeads";
-import useGetProducts from "@/hooks/useGetProducts";
-import { toPersianNumberWithCommas } from "@/utils/putCommaInNumber";
+import { categoryTableHeads } from "@/constants/tableHeads";
+import useGetCategories from "@/hooks/useGetCategories";
 import { toPersianDigits } from "@/utils/toPersianDigits";
 import Link from "next/link";
 import { BiEdit } from "react-icons/bi";
 import { FaTrashAlt } from "react-icons/fa";
 
 
-const Products = () => {
-  const { data, isLoading } = useGetProducts();
-  const { products } = data || {};
+const Categories = () => {
+  const { data, isLoading } = useGetCategories();
+  const { categories } = data || {};
 
   return (
     <>
@@ -22,16 +21,16 @@ const Products = () => {
       ) : (
         <section>
           <h1 className="text--white text-lg font-bold mb-1">
-            محصولات
+            دسته بندی ها
           </h1>
           <div className="shadow-sm overflow-auto my-8">
             <table className="text--white border-collapse table-auto w-full min-w-[800px] text-sm">
               <thead>
                 <tr>
-                  {productTableHeads.map((item) => {
+                  {categoryTableHeads.map((item) => {
                     return (
                       <th
-                        className="whitespace-nowrap table__th text-center"
+                        className="whitespace-nowrap table__th"
                         key={item.id}
                       >
                         {item.label}
@@ -41,33 +40,27 @@ const Products = () => {
                 </tr>
               </thead>
               <tbody>
-                {products?.map((product, index) => {
+                {categories?.map((category, index) => {
                   return (
-                    <tr key={product._id}>
+                    <tr key={category._id}>
                       <td className="table__td font-bold text-lg">
                         {toPersianDigits(index + 1)}
                       </td>
                       <td className="table__td  whitespace-nowrap truncate">
-                        {product?.title}
+                        {category?.title}
                       </td>
                       <td className="table__td  whitespace-nowrap truncate">
-                        {product?.category?.title}
+                        {category?.description}
                       </td>
                       <td className="table__td  whitespace-nowrap truncate">
-                        {`${toPersianNumberWithCommas(product?.price)} تومان`}
-                      </td>
-                      <td className="table__td  whitespace-nowrap truncate text-error font-bold text-lg">
-                        {`% ${toPersianNumberWithCommas(product?.discount)} -`}
+                        {category?.englishTitle}
                       </td>
                       <td className="table__td  whitespace-nowrap truncate">
-                        {`${toPersianNumberWithCommas(product?.offPrice)} تومان`}
-                      </td>
-                      <td className="table__td  whitespace-nowrap truncate">
-                        {toPersianNumberWithCommas(product?.countInStock)}
+                        {category?.type}
                       </td>
                       <td className="table__td  whitespace-nowrap truncate">
                         <div className="flex gap-x-2">
-                          <button><Link href={`/admin/products/edit/${product._id}`}><BiEdit className="text-lg text-success"/></Link></button>
+                          <button><Link href={`/admin/categories/edit/${category._id}`}><BiEdit className="text-lg text-success"/></Link></button>
                           <button><FaTrashAlt className="text-lg text-error"/></button>
                         </div>
                       </td>
@@ -83,4 +76,4 @@ const Products = () => {
   );
 };
 
-export default Products;
+export default Categories;

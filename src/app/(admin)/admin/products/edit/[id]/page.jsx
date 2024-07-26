@@ -1,17 +1,13 @@
 "use client";
-import Input from "@/common/Input";
-import SelectOption from "@/common/Select";
 import Form from "@/components/Form";
 import Loading from "@/components/Loading";
 import { useUpdateProduct } from "@/hooks/useAddProduct";
 import useGetCategories from "@/hooks/useGetCategories";
 import { useGetProductById } from "@/hooks/useGetProducts";
 import { toEnglishDigits } from "@/utils/toEnglishDigits";
-import { toPersianDigits } from "@/utils/toPersianDigits";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { TagsInput } from "react-tag-input-component";
 
 const fields = [
   {
