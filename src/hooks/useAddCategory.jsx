@@ -1,4 +1,4 @@
-import { addCategory } from "@/services/categoryService";
+import { addCategory, updateCategory } from "@/services/categoryService";
 import { useMutation } from "@tanstack/react-query";
 
 export const useAddCategory = () =>
@@ -6,3 +6,7 @@ export const useAddCategory = () =>
     mutationFn: addCategory,
   });
 
+export const useUpdateCategory = () =>
+  useMutation({
+    mutationFn: updateCategory,
+  });
