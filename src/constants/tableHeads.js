@@ -181,6 +181,10 @@ export const couponTableHeads = [
   },
   {
     id: 9,
+    label: "وضعیت",
+  },
+  {
+    id: 10,
     label: "عملیات",
   },
 
