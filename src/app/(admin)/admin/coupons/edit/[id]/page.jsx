@@ -20,25 +20,24 @@ const EditCoupon = () => {
     amount: "",
     usageLimit: "",
   });
-  const { data : selectOptions, isLoading : optionsLoading } = useGetProducts();
+  const { data: selectOptions, isLoading: optionsLoading } = useGetProducts();
   const { products } = selectOptions || {};
   const { isPending, mutateAsync } = useUpdateCoupon();
   const { data, isLoading } = useGetOneCoupon(id);
   const { coupon } = data || {};
-  
 
   useEffect(() => {
-    if(coupon) {
+    if (coupon) {
       setFormData({
-        code : coupon.code,
-        amount : coupon.amount,
-        usageLimit : coupon.usageLimit
+        code: coupon.code,
+        amount: coupon.amount,
+        usageLimit: coupon.usageLimit,
       });
-      setProductIds([...coupon.productIds])
+      setProductIds([...coupon.productIds]);
       setType(coupon?.type);
       setExpireDate(coupon.expireDate);
     }
-  } , [coupon])
+  }, [coupon]);
 
   const formChangeHandler = (e) => {
     setFormData({
@@ -49,13 +48,12 @@ const EditCoupon = () => {
 
   const setProductIdsHandler = (e) => {
     const isAll = e.find((p) => p._id === "all");
-    if(isAll){
-      setProductIds([{title : "همه محصولات" , _id : "all"}]);
-    }else {
+    if (isAll) {
+      setProductIds([{ title: "همه محصولات", _id: "all" }]);
+    } else {
       setProductIds(e);
     }
-  }
-
+  };
 
   const updateCoupon = async (e) => {
     e.preventDefault();
@@ -65,7 +63,9 @@ const EditCoupon = () => {
         editedCoupon: {
           ...formData,
           type,
-          productIds: productIds.find((p) => p._id === "all") ? products.map((p) => p._id) : productIds.map((p) => p._id),
+          productIds: productIds.find((p) => p._id === "all")
+            ? products.map((p) => p._id)
+            : productIds.map((p) => p._id),
           expireDate: new Date(expireDate).toISOString(),
         },
       });
@@ -97,7 +97,6 @@ const EditCoupon = () => {
           isPending={isPending}
           btntext="ویرایش کد تخفیف"
           defaultValue={productIds}
-          
         />
       )}
     </div>

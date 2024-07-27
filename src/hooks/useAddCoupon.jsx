@@ -1,4 +1,8 @@
-import { addCoupon, updateCoupon } from "@/services/couponService";
+import {
+  addCoupon,
+  removeCoupon,
+  updateCoupon,
+} from "@/services/couponService";
 import { useMutation } from "@tanstack/react-query";
 
 export const useAddCoupon = () =>
@@ -9,4 +13,9 @@ export const useAddCoupon = () =>
 export const useUpdateCoupon = () =>
   useMutation({
     mutationFn: updateCoupon,
+  });
+
+export const useRemoveCoupon = () =>
+  useMutation({
+    mutationFn: removeCoupon,
   });

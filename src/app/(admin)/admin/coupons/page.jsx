@@ -1,20 +1,35 @@
 "use client";
 import Loading from "@/components/Loading";
 import { couponTableHeads, userTableHeads } from "@/constants/tableHeads";
+import { useRemoveCoupon } from "@/hooks/useAddCoupon";
 import { useGetCoupons } from "@/hooks/useGetCoupons";
 import useGetProducts from "@/hooks/useGetProducts";
 import { toLoacalDate } from "@/utils/localDate";
 import { toPersianNumberWithCommas } from "@/utils/putCommaInNumber";
 import { toPersianDigits } from "@/utils/toPersianDigits";
+import { useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
+import toast from "react-hot-toast";
 import { BiEdit } from "react-icons/bi";
 import { FaTrashAlt } from "react-icons/fa";
 
 const Coupons = () => {
+  const { mutateAsync } = useRemoveCoupon();
   const { data, isLoading } = useGetCoupons();
   const { coupons } = data || {};
   const { data: productsData, isLoading: productsLoading } = useGetProducts();
   const { products } = productsData || {};
+  const queryClient = useQueryClient();
+
+  const removeCouponHandler = async (id) => {
+    try {
+      const { message } = await mutateAsync(id);
+      toast.success(message);
+      queryClient.invalidateQueries({ queryKey: ["get-coupons"] });
+    } catch (err) {
+      toast.error(err?.response?.data?.message);
+    }
+  };
   return (
     <>
       {isLoading && productsLoading ? (
@@ -64,7 +79,7 @@ const Coupons = () => {
                       </td>
                       <td className="table__td">
                         <div className="flex flex-col gap-y-2 items-start">
-                          {products.length === coupon?.productIds.length ? (
+                          {products?.length === coupon?.productIds.length ? (
                             <span className="badge bg-blue-700">
                               همه محصولات
                             </span>
@@ -89,7 +104,8 @@ const Coupons = () => {
                         {toLoacalDate(coupon?.expireDate)}
                       </td>
                       <td className="table__td text-xs text-nowrap">
-                        {coupon?.isActive ? (
+                        {new Date().getTime() <
+                        new Date(coupon?.expireDate).getTime() ? (
                           <span className="badge badge--success">فعال</span>
                         ) : (
                           <span className="badge badge--error">غیر فعال</span>
@@ -102,7 +118,9 @@ const Coupons = () => {
                               <BiEdit className="text-lg text-success" />
                             </Link>
                           </button>
-                          <button>
+                          <button
+                            onClick={() => removeCouponHandler(coupon._id)}
+                          >
                             <FaTrashAlt className="text-lg text-error" />
                           </button>
                         </div>

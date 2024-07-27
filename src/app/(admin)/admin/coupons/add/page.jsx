@@ -25,13 +25,12 @@ const AddCoupon = () => {
 
   const setProductIdsHandler = (e) => {
     const isAll = e.find((p) => p._id === "all");
-    if(isAll){
-      setProductIds([{title : "همه محصولات" , _id : "all"}]);
-    }else {
+    if (isAll) {
+      setProductIds([{ title: "همه محصولات", _id: "all" }]);
+    } else {
       setProductIds(e);
     }
-  }
-
+  };
 
   const formChangeHandler = (e) => {
     setFormData({
@@ -46,7 +45,9 @@ const AddCoupon = () => {
       const { message } = await mutateAsync({
         ...formData,
         type,
-        productIds: productIds.find((p) => p._id === "all") ? products.map((p) => p._id) : productIds.map((p) => p._id),
+        productIds: productIds.find((p) => p._id === "all")
+          ? products.map((p) => p._id)
+          : productIds.map((p) => p._id),
         expireDate: new Date(expireDate).toISOString(),
       });
       toast.success(message);

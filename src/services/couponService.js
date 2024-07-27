@@ -16,5 +16,8 @@ export const updateCoupon = ({id , editedCoupon}) => {
   return http.patch(`/admin/coupon/update/${id}` , editedCoupon).then(({data}) => data.data);
 }
 
+export const removeCoupon = (id) => {
+  return http.delete(`/admin/coupon/remove/${id}`).then(({data}) => data.data);
+}
 
 
