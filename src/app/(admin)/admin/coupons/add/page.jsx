@@ -75,7 +75,7 @@ const AddCoupon = () => {
           </div>
           <div>
             <Input
-              label="مقدار"
+              label={`مقدار (${type === "percent" ? "درصد" : "تومان"})`}
               name="amount"
               onChange={formChangeHandler}
               value={toPersianDigits(formData.amount)}
