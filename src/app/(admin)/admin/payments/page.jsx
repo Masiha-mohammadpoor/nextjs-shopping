@@ -9,6 +9,7 @@ import { toPersianDigits } from "@/utils/toPersianDigits";
 const Payments = () => {
   const { data, isLoading } = useGetPayments();
   const {payments} = data || {};
+  console.log(payments)
 
   return (
     <>
@@ -57,10 +58,10 @@ const Payments = () => {
                           {payment.cart.productDetail.map((product) => {
                             return (
                               <span
-                                className="badge bg-blue-700"
+                                className="badge bg-blue-700 flex items-center gap-x-2"
                                 key={product._id}
                               >
-                                {product.title}
+                                <span>{product.title}</span> <span className="text-red-700 font-bold">x{product.quantity}</span>
                               </span>
                             );
                           })}

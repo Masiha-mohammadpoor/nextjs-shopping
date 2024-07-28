@@ -14,7 +14,7 @@ const Navigation = () => {
   const { showMenu, setShowMenu } = useProfileMenu();
 
   return (
-    <nav className="shadow-lg w-full top-0 p-3 py-4 sm:px-20 text--white glassmorphism flex items-center justify-between">
+    <nav className="shadow-lg w-full p-3 py-4 sm:px-20 text--white glassmorphism flex items-center justify-between sticky top-0 z-50">
       <div>
         <div className="block lg:hidden">
           <button onClick={() => setShowMenu(!showMenu)}>

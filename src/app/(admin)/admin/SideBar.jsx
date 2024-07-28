@@ -12,6 +12,7 @@ const SideBar = () => {
 
   const {showMenu , setShowMenu} = useProfileMenu();
   const pathname = usePathname();
+  console.log(pathname)
 
   const logoutHandler = async () => {
     try{
@@ -22,7 +23,7 @@ const SideBar = () => {
     }
   }
   return (
-    <section className={`transition-all duration-300 relative lg:right-0 ${showMenu ? "right-0" : "-right-80"} lg:static lg:col-span-1 col-span-4 row-start-1 w-[250px] lg:w-auto h-screen lg:row-start-auto z-50 pb-20 mb-0`}>
+    <section className={`transition-all duration-300 fixed top-0 bottom-0 lg:right-0 ${showMenu ? "right-0" : "-right-80"} lg:static lg:col-span-1 col-span-4 row-start-1 w-[250px] lg:w-auto h-screen lg:row-start-auto z-50 pb-20 mb-0`}>
     <article className="py-4 glassmorphism h-screen overflow-y-auto">
       <div className="px-6 flex items-center justify-between mb-10">
         <div className="flex items-center">
@@ -34,11 +35,11 @@ const SideBar = () => {
       <ul className="pl-20">
       <Link href="/"><li className="rounded-l-full py-2 mb-3 pr-5 w-full transition-all duration-300 text--white hover:glassmorphism">صفحه اصلی</li></Link>
       <Link href="/admin"><li className={`${pathname === "/admin" ? "glassmorphism" : ""} rounded-l-full py-2 mb-3 pr-5 w-full transition-all duration-300 text--white hover:glassmorphism`}>داشبورد</li></Link>
-      <Link href="/admin/users"><li className={`${pathname === "/admin/users" ? "glassmorphism" : ""} rounded-l-full py-2 mb-3 pr-5 w-full transition-all duration-300 text--white hover:glassmorphism`}>کاربران</li></Link>
-      <Link href="/admin/products"><li className={`${pathname === "/admin/products" ? "glassmorphism" : ""} rounded-l-full py-2 mb-3 pr-5 w-full transition-all duration-300 text--white hover:glassmorphism`}>محصولات</li></Link>
-      <Link href="/admin/categories"><li className={`${pathname === "/admin/categories" ? "glassmorphism" : ""} rounded-l-full py-2 mb-3 pr-5 w-full transition-all duration-300 text--white hover:glassmorphism`}>دسته بندی</li></Link>
-      <Link href="/admin/payments"><li className={`${pathname === "/admin/payments" ? "glassmorphism" : ""} rounded-l-full py-2 mb-3 pr-5 w-full transition-all duration-300 text--white hover:glassmorphism`}>سفارشات</li></Link>
-      <Link href="/admin/coupons"><li className={`${pathname === "/admin/coupons" ? "glassmorphism" : ""} rounded-l-full py-2 mb-3 pr-5 w-full transition-all duration-300 text--white hover:glassmorphism`}>کد تخفیف</li></Link>
+      <Link href="/admin/users"><li className={`${pathname.includes("/admin/users")  ? "glassmorphism" : ""} rounded-l-full py-2 mb-3 pr-5 w-full transition-all duration-300 text--white hover:glassmorphism`}>کاربران</li></Link>
+      <Link href="/admin/products"><li className={`${pathname.includes("/admin/products")  ? "glassmorphism" : ""} rounded-l-full py-2 mb-3 pr-5 w-full transition-all duration-300 text--white hover:glassmorphism`}>محصولات</li></Link>
+      <Link href="/admin/categories"><li className={`${pathname.includes("/admin/categories")  ? "glassmorphism" : ""} rounded-l-full py-2 mb-3 pr-5 w-full transition-all duration-300 text--white hover:glassmorphism`}>دسته بندی</li></Link>
+      <Link href="/admin/payments"><li className={`${pathname.includes("/admin/payments") ? "glassmorphism" : ""} rounded-l-full py-2 mb-3 pr-5 w-full transition-all duration-300 text--white hover:glassmorphism`}>سفارشات</li></Link>
+      <Link href="/admin/coupons"><li className={`${pathname.includes("/admin/coupons") ? "glassmorphism" : ""} rounded-l-full py-2 mb-3 pr-5 w-full transition-all duration-300 text--white hover:glassmorphism`}>کد تخفیف</li></Link>
       <li onClick={logoutHandler} className="cursor-pointer text-error rounded-l-full py-2 mb-3 pr-5 w-full transition-all duration-300 hover:glassmorphism">خروج</li>
       </ul>
     </article>

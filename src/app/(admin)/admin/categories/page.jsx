@@ -9,6 +9,7 @@ import Link from "next/link";
 import toast from "react-hot-toast";
 import { BiEdit } from "react-icons/bi";
 import { FaTrashAlt } from "react-icons/fa";
+import { FaCirclePlus } from "react-icons/fa6";
 
 
 const Categories = () => {
@@ -36,9 +37,15 @@ const Categories = () => {
         </div>
       ) : (
         <section>
-          <h1 className="text--white text-lg font-bold mb-1">
-            دسته بندی ها
-          </h1>
+          <div className="w-full flex items-center justify-between">
+            <h1 className="text--white text-lg font-bold mb-1">دسته بندی ها</h1>
+            <Link
+              href="/admin/categories/add"
+              className="flex items-center gap-x-1 text--white text-sm sm:text-base"
+            >
+              <FaCirclePlus /> افزودن دسته بندی
+            </Link>
+          </div>
           <div className="shadow-sm overflow-auto my-8">
             <table className="text--white border-collapse table-auto w-full min-w-[800px] text-sm">
               <thead>

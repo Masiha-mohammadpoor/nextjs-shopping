@@ -82,7 +82,7 @@ body {
   margin: 0;
   font-family: var(--vazir-font);
   min-height: 100vh;
-  /* user-select: none; */
+  user-select: none;
   color: var(--background-app-rgb);
   background: linear-gradient(90deg, #0d9ec6 0%, #000851 100%);
 }

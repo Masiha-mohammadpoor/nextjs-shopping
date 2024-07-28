@@ -12,6 +12,7 @@ import Link from "next/link";
 import toast from "react-hot-toast";
 import { BiEdit } from "react-icons/bi";
 import { FaTrashAlt } from "react-icons/fa";
+import { FaCirclePlus } from "react-icons/fa6";
 
 const Coupons = () => {
   const { mutateAsync } = useRemoveCoupon();
@@ -38,9 +39,15 @@ const Coupons = () => {
         </div>
       ) : (
         <section>
-          <h1 className="text--white text-lg font-bold mb-1">
-            لیست کد تخفیف ها
-          </h1>
+          <div className="w-full flex items-center justify-between">
+            <h1 className="text--white text-lg font-bold mb-1">کد های تخفیف</h1>
+            <Link
+              href="/admin/coupons/add"
+              className="flex items-center gap-x-1 text--white text-sm sm:text-base"
+            >
+              <FaCirclePlus /> افزودن کد تخفیف
+            </Link>
+          </div>
           <div className="shadow-sm overflow-auto my-8">
             <table className="text--white border-collapse table-auto w-full min-w-[800px] text-sm">
               <thead>

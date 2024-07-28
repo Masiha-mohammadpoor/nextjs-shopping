@@ -11,10 +11,11 @@ import { IoClose } from "react-icons/io5";
 
 const SideBar = () => {
 
-  const {data , isLoading} = useGetUser();
+  const {data} = useGetUser();
   const {user} = data || {}
   const {showMenu , setShowMenu} = useProfileMenu();
   const pathname = usePathname();
+  console.log(pathname)
 
   const logoutHandler = async () => {
     try{
@@ -25,8 +26,8 @@ const SideBar = () => {
     }
   }
   return (
-    <section className={`transition-all duration-300 relative lg:right-0 ${showMenu ? "right-0" : "-right-80"} lg:static lg:col-span-1 col-span-4 row-start-1 w-[250px] lg:w-auto h-screen lg:row-start-auto z-50 pb-20`}>
-    <article className="py-4 glassmorphism h-screen">
+    <section className={`transition-all duration-300 fixed top-0 bottom-0 lg:right-0 ${showMenu ? "right-0" : "-right-80"} lg:static lg:col-span-1 col-span-4 row-start-1 w-[250px] lg:w-auto h-screen lg:row-start-auto z-50 pb-20`}>
+    <article className="py-4 glassmorphism h-screen overflow-y-auto">
       <div className="px-6 flex items-center justify-between mb-10">
         <div className="flex items-center">
         <Image src="/icon.png" alt="فرانت شاپ" width={40} height={40} className="ml-3"/>

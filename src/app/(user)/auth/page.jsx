@@ -62,10 +62,10 @@ const Auth = () => {
     try {
       const {user , message} = await checkOtpMutate({phoneNumber , otp});
       toast.success(message);
-      // queryClient.invalidateQueries({queryKey : ["get-user"]})
+      queryClient.invalidateQueries({queryKey : ["get-user"]})
 
       if(user.isActive){
-        router.replace("/");
+        router.push("/");
         
       }else {
         router.push("/complete-profile")

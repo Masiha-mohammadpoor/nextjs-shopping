@@ -1,7 +1,6 @@
 "use client";
 import Input from "@/common/Input";
 import { useState } from "react";
-import { BeatLoader } from "react-spinners";
 import { useMutation } from "@tanstack/react-query";
 import { completeProfile } from "@/services/authService";
 import toast from "react-hot-toast";
@@ -27,10 +26,9 @@ const CompleteProfile = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      const {user , message} = await mutateAsync(values);
+      const {message} = await mutateAsync(values);
       toast.success(message);
-      if (user.isActive) router.push("/");
-      window.location.reload();
+      router.push("/");
     } catch (err) {
       toast.error(err?.response?.data?.message);
     }

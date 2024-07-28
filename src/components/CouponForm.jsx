@@ -84,6 +84,8 @@ const CouponForm = ({
           format="YYYY/MM/DD"
           calendar={persian}
           locale={persian_fa}
+          calendarPosition="top"
+          fixMainPosition="bottom"
         />
       </div>
       {/* Select */}

@@ -10,24 +10,23 @@ import Link from "next/link";
 import toast from "react-hot-toast";
 import { BiEdit } from "react-icons/bi";
 import { FaTrashAlt } from "react-icons/fa";
-
+import { FaCirclePlus } from "react-icons/fa6";
 
 const Products = () => {
-  const {mutateAsync} = useRemoveProduct();
+  const { mutateAsync } = useRemoveProduct();
   const { data, isLoading } = useGetProducts();
   const { products } = data || {};
-  const queryClient = useQueryClient()
-
+  const queryClient = useQueryClient();
 
   const removeProductHandler = async (id) => {
     try {
-      const {message} = await mutateAsync(id);
+      const { message } = await mutateAsync(id);
       toast.success(message);
-      queryClient.invalidateQueries({queryKey : ["get-products"]});
-    }catch(err){
+      queryClient.invalidateQueries({ queryKey: ["get-products"] });
+    } catch (err) {
       toast.error(err?.response?.data?.message);
     }
-  }
+  };
 
   return (
     <>
@@ -37,9 +36,15 @@ const Products = () => {
         </div>
       ) : (
         <section>
-          <h1 className="text--white text-lg font-bold mb-1">
-            محصولات
-          </h1>
+          <div className="w-full flex items-center justify-between">
+            <h1 className="text--white text-lg font-bold mb-1">محصولات</h1>
+            <Link
+              href="/admin/products/add"
+              className="flex items-center gap-x-1 text--white text-sm sm:text-base"
+            >
+              <FaCirclePlus /> افزودن محصول
+            </Link>
+          </div>
           <div className="shadow-sm overflow-auto my-8">
             <table className="text--white border-collapse table-auto w-full min-w-[800px] text-sm">
               <thead>
@@ -76,15 +81,25 @@ const Products = () => {
                         {`% ${toPersianNumberWithCommas(product?.discount)} -`}
                       </td>
                       <td className="table__td  whitespace-nowrap truncate">
-                        {`${toPersianNumberWithCommas(product?.offPrice)} تومان`}
+                        {`${toPersianNumberWithCommas(
+                          product?.offPrice
+                        )} تومان`}
                       </td>
-                      <td className="table__td  whitespace-nowrap truncate">
+                      <td className="table__td  whitespace-nowrap truncate text-center">
                         {toPersianNumberWithCommas(product?.countInStock)}
                       </td>
                       <td className="table__td  whitespace-nowrap truncate">
                         <div className="flex gap-x-2">
-                          <button><Link href={`/admin/products/edit/${product._id}`}><BiEdit className="text-lg text-success"/></Link></button>
-                          <button onClick={() => removeProductHandler(product._id)}><FaTrashAlt className="text-lg text-error"/></button>
+                          <button>
+                            <Link href={`/admin/products/edit/${product._id}`}>
+                              <BiEdit className="text-lg text-success" />
+                            </Link>
+                          </button>
+                          <button
+                            onClick={() => removeProductHandler(product._id)}
+                          >
+                            <FaTrashAlt className="text-lg text-error" />
+                          </button>
                         </div>
                       </td>
                     </tr>

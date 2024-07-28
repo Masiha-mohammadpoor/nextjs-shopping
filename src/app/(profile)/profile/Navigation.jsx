@@ -14,7 +14,7 @@ const Navigation = () => {
   const { showMenu, setShowMenu } = useProfileMenu();
 
   return (
-    <nav className="shadow-lg w-full top-0 p-3 py-4 sm:px-20 text--white glassmorphism flex items-center justify-between">
+    <nav className="shadow-lg w-full p-3 py-4 sm:px-20 text--white glassmorphism flex items-center justify-between sticky top-0 z-50">
       <div>
         <div className="block lg:hidden">
           <button onClick={() => setShowMenu(!showMenu)}>
@@ -22,7 +22,7 @@ const Navigation = () => {
           </button>
         </div>
       </div>
-      {isLoading ? <Loading size={10}/> :<div className="flex items-center gap-x-2 sm:gap-x-8 p-0 z-50">
+        {isLoading ? <Loading size={10}/> :<div className="flex items-center gap-x-2 sm:gap-x-8 p-0 z-50">
         <Link href="/cart">
           <button className="w-10 h-7 pt-1 relative flex justify-center">
             <MdOutlineShoppingCart size={23} />
