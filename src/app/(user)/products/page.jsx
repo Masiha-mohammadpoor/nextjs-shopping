@@ -10,6 +10,7 @@ import Image from "next/image";
 import { toPersianNumberWithCommas } from "@/utils/putCommaInNumber";
 import { toPersianDigits } from "@/utils/toPersianDigits";
 import Price from "@/components/Price";
+import AddToCart from "./[slug]/AddToCart";
 export const dynamic = "force-dynamic";
 
 const Products = async ({ searchParams }) => {
@@ -33,15 +34,15 @@ const Products = async ({ searchParams }) => {
         {products.map((p) => {
           return (
             <div
-              className="max-w-[350px] min-w-[270px] md:min-w-[240px] lg:min-w-[240px] xl:min-w-[280px] flex flex-col items-center col-span-12 sm:col-span-6 md:col-span-4 glassmorphism rounded-xl px-3 max-h-[300px] mx-auto"
+              className="max-w-[350px] min-w-[270px] md:min-w-[240px] lg:min-w-[240px] xl:min-w-[280px] flex flex-col items-center col-span-12 sm:col-span-6 md:col-span-4 glassmorphism rounded-xl px-3 max-h-[350px] mx-auto"
               key={p._id}
             >
               <div className="w-full -mt-5 py-3 flex justify-center items-center  rounded-xl bg-white overflow-hidden">
                 <Image
                   src={p.imageLink}
                   alt={p.title}
-                  width={150}
-                  height={150}
+                  width={135}
+                  height={135}
                 />
               </div>
               <div className="mt-4 w-full text--white text-sm flex justify-start">
@@ -60,6 +61,9 @@ const Products = async ({ searchParams }) => {
                   </button>
                 </Link>
                 <Price discount={p.discount} price={p.price} offPrice={p.offPrice}/>
+              </div>
+              <div className="w-full my-3">
+                <AddToCart product={p}/>
               </div>
             </div>
           );
