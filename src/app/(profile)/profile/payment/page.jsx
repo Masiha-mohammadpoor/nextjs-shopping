@@ -10,7 +10,6 @@ import Link from "next/link";
 const Payment = () => {
   const { data, isLoading } = useGetUser();
   const { payments } = data || {};
-  console.log(payments);
 
   return (
     <>
@@ -49,19 +48,20 @@ const Payment = () => {
                           {toPersianDigits(payment.invoiceNumber)}
                         </td>
                         <td className="table__td">
-                          <div className="flex flex-col gap-y-2 items-start">
-                            {payment.cart.productDetail.map((product) => {
-                              return (
-                                <span
-                                  className="badge bg-blue-700"
-                                  key={product._id}
-                                >
-                                  {product.title}
-                                </span>
-                              );
-                            })}
-                          </div>
-                        </td>
+                        <div className="flex flex-col gap-y-2 items-start">
+                          {payment.cart.productDetail.map((product) => {
+                            return (
+                              <Link href={`/products/${product.slug}`} key={product._id}>
+                              <span
+                                className="badge bg-blue-700 flex items-center gap-x-2"
+                              >
+                                <span>{product.title}</span> <span className="text-red-700 font-bold">x{product.quantity}</span>
+                              </span>
+                              </Link>
+                            );
+                          })}
+                        </div>
+                      </td>
                         <td className="table__td font-bold text-lg">
                           <div className="flex gap-x-1 items-center">
                             {toPersianNumberWithCommas(payment.amount)}

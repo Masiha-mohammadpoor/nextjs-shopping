@@ -15,7 +15,6 @@ const SideBar = () => {
   const {user} = data || {}
   const {showMenu , setShowMenu} = useProfileMenu();
   const pathname = usePathname();
-  console.log(pathname)
 
   const logoutHandler = async () => {
     try{

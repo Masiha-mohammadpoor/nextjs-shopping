@@ -13,8 +13,8 @@ import { LuCalendarClock } from "react-icons/lu";
 import { MdArrowRightAlt } from "react-icons/md";
 
 const Profile = () => {
-  const { data, isLoading } = useGetUser();
-  const { user, cart, payments } = data || {};
+  const { data,  } = useGetUser();
+  const { user, payments } = data || {};
 
   if (user)
     return (
@@ -104,12 +104,13 @@ const Profile = () => {
                         <div className="flex flex-col gap-y-2 items-start">
                           {payment.cart.productDetail.map((product) => {
                             return (
+                              <Link href={`/products/${product.slug}`} key={product._id}>
                               <span
-                                className="badge bg-blue-700"
-                                key={product._id}
+                                className="badge bg-blue-700 flex items-center gap-x-2"
                               >
-                                {product.title}
+                                <span>{product.title}</span> <span className="text-red-700 font-bold">x{product.quantity}</span>
                               </span>
+                              </Link>
                             );
                           })}
                         </div>
