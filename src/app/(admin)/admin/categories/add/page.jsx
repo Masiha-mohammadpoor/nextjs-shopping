@@ -45,26 +45,26 @@ const AddCategory = () => {
 
   const addNewCategory = async (e) => {
     e.preventDefault();
-    try{
-      const {message} = await mutateAsync(formData);
+    try {
+      const { message } = await mutateAsync(formData);
       toast.success(message);
       router.push("/admin/categories");
-    }catch(err){
-      toast.error(err?.response?.data?.message)
+    } catch (err) {
+      toast.error(err?.response?.data?.message);
     }
   };
 
   return (
     <div dir="rtl" className="w-full flex justify-center lg:justify-start">
-        <CategoryForm
-          onSubmit={addNewCategory}
-          title="افزودن دسته بندی"
-          fields={fields}
-          formChangeHandler={formChangeHandler}
-          formData={formData}
-          isPending={isPending}
-          btnText="افزودن دسته بندی"   
-        />
+      <CategoryForm
+        onSubmit={addNewCategory}
+        title="افزودن دسته بندی"
+        fields={fields}
+        formChangeHandler={formChangeHandler}
+        formData={formData}
+        isPending={isPending}
+        btnText="افزودن دسته بندی"
+      />
     </div>
   );
 };

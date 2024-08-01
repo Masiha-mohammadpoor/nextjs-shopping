@@ -4,4 +4,4 @@ export const toStringCookies = (cookies) => {
     strCookie += `${item?.name}=${item?.value};`;
   });
   return strCookie;
-}
+};

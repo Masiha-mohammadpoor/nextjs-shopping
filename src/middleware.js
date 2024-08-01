@@ -11,7 +11,7 @@ export async function middleware(req) {
   }
   if (pathname.startsWith("/admin")) {
     if (!user) return NextResponse.redirect(new URL("/auth", url));
-    if(user && user.role !== "ADMIN") {
+    if (user && user.role !== "ADMIN") {
       return NextResponse.redirect(new URL("/", url));
     }
   }

@@ -1,6 +1,6 @@
 "use client";
 import Loading from "@/components/Loading";
-import { couponTableHeads, userTableHeads } from "@/constants/tableHeads";
+import { couponTableHeads } from "@/constants/tableHeads";
 import { useRemoveCoupon } from "@/hooks/useAddCoupon";
 import { useGetCoupons } from "@/hooks/useGetCoupons";
 import useGetProducts from "@/hooks/useGetProducts";

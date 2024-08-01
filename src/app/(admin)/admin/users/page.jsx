@@ -3,7 +3,6 @@ import Loading from "@/components/Loading";
 import { userTableHeads } from "@/constants/tableHeads";
 import useGetUsers from "@/hooks/useGetUsers";
 import { toLoacalDate } from "@/utils/localDate";
-import { toPersianNumberWithCommas } from "@/utils/putCommaInNumber";
 import { toPersianDigits } from "@/utils/toPersianDigits";
 import { FaCircleCheck } from "react-icons/fa6";
 

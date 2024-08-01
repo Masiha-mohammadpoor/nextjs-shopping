@@ -36,7 +36,7 @@ const EditCategory = () => {
     type: "product",
     description: "",
   });
-  
+
   const { isPending, mutateAsync } = useUpdateCategory();
   const { data, isLoading } = useGetCategoryById(params.id);
   const { category } = data || {};
@@ -89,7 +89,7 @@ const EditCategory = () => {
           formChangeHandler={formChangeHandler}
           formData={formData}
           isPending={isPending}
-          btnText="ویرایش دسته بندی"   
+          btnText="ویرایش دسته بندی"
         />
       )}
     </div>

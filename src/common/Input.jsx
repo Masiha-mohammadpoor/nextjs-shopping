@@ -1,8 +1,6 @@
-"use client"
+"use client";
 
-import { toPersianDigits } from "@/utils/toPersianDigits";
-
-const Input = ({name , label , value , onChange , disabled}) => {
+const Input = ({ name, label, value, onChange, disabled }) => {
   return (
     <>
       <label htmlFor={name} className="inline-block text-white mb-3 text-sm">

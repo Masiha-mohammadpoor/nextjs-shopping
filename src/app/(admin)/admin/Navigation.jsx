@@ -22,21 +22,25 @@ const Navigation = () => {
           </button>
         </div>
       </div>
-      {isLoading ? <Loading size={10}/> :<div className="flex items-center gap-x-2 sm:gap-x-8 p-0 z-50">
-        <Link href="/cart">
-          <button className="w-10 h-7 pt-1 relative flex justify-center">
-            <MdOutlineShoppingCart size={23} />
-            <span className="absolute badge--error -top-1.5 -right-1.5">
-              {toPersianDigits(cart?.productDetail?.length)}
-            </span>
-          </button>
-        </Link>
-        <Link href="/profile">
-          <button className="w-10 h-7 pt-1 flex justify-center items-center">
-            <FiUser size={25} />
-          </button>
-        </Link>
-      </div>}
+      {isLoading ? (
+        <Loading size={10} />
+      ) : (
+        <div className="flex items-center gap-x-2 sm:gap-x-8 p-0 z-50">
+          <Link href="/cart">
+            <button className="w-10 h-7 pt-1 relative flex justify-center">
+              <MdOutlineShoppingCart size={23} />
+              <span className="absolute badge--error -top-1.5 -right-1.5">
+                {toPersianDigits(cart?.productDetail?.length)}
+              </span>
+            </button>
+          </Link>
+          <Link href="/profile">
+            <button className="w-10 h-7 pt-1 flex justify-center items-center">
+              <FiUser size={25} />
+            </button>
+          </Link>
+        </div>
+      )}
     </nav>
   );
 };

@@ -19,10 +19,8 @@ const Profile = () => {
   const { users } = usersData || {};
   const { data: paymentsData } = useGetPayments();
   const { payments } = paymentsData || {};
-  const {data : productsData} = useGetProducts();
-  const {products} = productsData || {};
-
-
+  const { data: productsData } = useGetProducts();
+  const { products } = productsData || {};
 
   if (users && payments && products)
     return (
@@ -110,18 +108,18 @@ const Profile = () => {
                             {toPersianDigits(payment?.invoiceNumber)}
                           </td>
                           <td className="table__td  whitespace-nowrap truncate">
-                            <div>
+                            {payment?.user && <div>
                               <p>{payment.user.name}</p>
                               <p>
                                 {toPersianDigits(payment?.user?.phoneNumber)}
                               </p>
                               <p>{payment.user.email}</p>
-                            </div>
+                            </div>}
                           </td>
                           <td className="table__td">
                             <div className="flex flex-col gap-y-2 items-start">
                               {payment.cart.productDetail.map((product) => {
-                                console.log(product.quantity)
+                                console.log(product.quantity);
                                 // purchases += product.quantity;
                                 return (
                                   <span

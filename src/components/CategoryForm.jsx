@@ -1,6 +1,4 @@
-import SelectOption from "@/common/Select";
 import { toPersianDigits } from "@/utils/toPersianDigits";
-import { TagsInput } from "react-tag-input-component";
 import Loading from "./Loading";
 import Input from "@/common/Input";
 
@@ -11,7 +9,7 @@ const CategoryForm = ({
   formChangeHandler,
   formData,
   isPending,
-  btnText
+  btnText,
 }) => {
   return (
     <form onSubmit={onSubmit} className="w-[300px] flex gap-y-4 flex-col">

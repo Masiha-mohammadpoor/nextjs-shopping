@@ -6,9 +6,9 @@ const useProfileMenu = () => {
 
   useEffect(() => {
     setShowMenu(false);
-  },[])
+  }, []);
 
-  return {showMenu , setShowMenu};
-}
- 
+  return { showMenu, setShowMenu };
+};
+
 export default useProfileMenu;

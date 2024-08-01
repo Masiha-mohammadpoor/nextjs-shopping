@@ -1,6 +1,5 @@
 import "../../globals.css";
 import vazirFont from "@/constants/localFonts";
-import Header from "../../../components/Header";
 import { Toaster } from "react-hot-toast";
 import Providers from "../../providers";
 import SideBar from "./SideBar";

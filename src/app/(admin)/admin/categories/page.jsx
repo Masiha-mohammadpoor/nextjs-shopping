@@ -11,23 +11,21 @@ import { BiEdit } from "react-icons/bi";
 import { FaTrashAlt } from "react-icons/fa";
 import { FaCirclePlus } from "react-icons/fa6";
 
-
 const Categories = () => {
-  const {mutateAsync} = useRemoveCategories();
+  const { mutateAsync } = useRemoveCategories();
   const { data, isLoading } = useGetCategories();
   const { categories } = data || {};
-  const queryClient = useQueryClient()
-
+  const queryClient = useQueryClient();
 
   const removeCategoryHandler = async (id) => {
     try {
-      const {message} = await mutateAsync(id);
+      const { message } = await mutateAsync(id);
       toast.success(message);
-      queryClient.invalidateQueries({queryKey : ["get-categories"]});
-    }catch(err){
+      queryClient.invalidateQueries({ queryKey: ["get-categories"] });
+    } catch (err) {
       toast.error(err?.response?.data?.message);
     }
-  }
+  };
 
   return (
     <>
@@ -52,10 +50,7 @@ const Categories = () => {
                 <tr>
                   {categoryTableHeads.map((item) => {
                     return (
-                      <th
-                        className="whitespace-nowrap table__th"
-                        key={item.id}
-                      >
+                      <th className="whitespace-nowrap table__th" key={item.id}>
                         {item.label}
                       </th>
                     );
@@ -83,8 +78,18 @@ const Categories = () => {
                       </td>
                       <td className="table__td  whitespace-nowrap truncate">
                         <div className="flex gap-x-2">
-                          <button><Link href={`/admin/categories/edit/${category._id}`}><BiEdit className="text-lg text-success"/></Link></button>
-                          <button onClick={() => removeCategoryHandler(category._id)}><FaTrashAlt className="text-lg text-error"/></button>
+                          <button>
+                            <Link
+                              href={`/admin/categories/edit/${category._id}`}
+                            >
+                              <BiEdit className="text-lg text-success" />
+                            </Link>
+                          </button>
+                          <button
+                            onClick={() => removeCategoryHandler(category._id)}
+                          >
+                            <FaTrashAlt className="text-lg text-error" />
+                          </button>
                         </div>
                       </td>
                     </tr>

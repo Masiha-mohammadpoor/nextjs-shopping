@@ -13,7 +13,7 @@ export default function RootLayout({ children }) {
     <html lang="fa" dir="rtl">
       <body className={`${vazirFont.variable} font-sans overflow-hidden`}>
         <Providers>
-        <Header />
+          <Header />
           <main>{children}</main>
         </Providers>
         <Toaster />

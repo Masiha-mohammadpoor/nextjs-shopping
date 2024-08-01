@@ -13,9 +13,8 @@ import { useRouter } from "next/navigation";
 const RESEND_TIME = 90;
 
 const Auth = () => {
-
   const router = useRouter();
-  const queryClient = useQueryClient()
+  const queryClient = useQueryClient();
   const [phoneNumber, setPhoneNumber] = useState("");
   const [step, setStep] = useState(1);
   const [otp, setOtp] = useState("");
@@ -23,18 +22,21 @@ const Auth = () => {
   const { isPending: getOtpLoading, mutateAsync } = useMutation({
     mutationFn: getOtp,
   });
-  const { isPending: checkOtpLoading, mutateAsync: checkOtpMutate } = useMutation({
+  const { isPending: checkOtpLoading, mutateAsync: checkOtpMutate } =
+    useMutation({
       mutationFn: checkOtp,
     });
 
   useEffect(() => {
-    const timer = time > 0 && setInterval(() => {
-      setTime((t) => t - 1);
-    }, 1000);
+    const timer =
+      time > 0 &&
+      setInterval(() => {
+        setTime((t) => t - 1);
+      }, 1000);
 
     return () => {
-      if(timer) clearInterval(timer)
-    }
+      if (timer) clearInterval(timer);
+    };
   }, []);
 
   const phoneNumberHandler = (e) => {
@@ -50,25 +52,20 @@ const Auth = () => {
       setTime(RESEND_TIME);
     } catch (err) {
       toast.error(err?.response?.data?.message);
-      // delete after
-      setStep(2);
-      setTime(RESEND_TIME);
-      setOtp("");
     }
   };
 
   const submitOtp = async (e) => {
     e.preventDefault();
     try {
-      const {user , message} = await checkOtpMutate({phoneNumber , otp});
+      const { user, message } = await checkOtpMutate({ phoneNumber, otp });
       toast.success(message);
-      queryClient.invalidateQueries({queryKey : ["get-user"]})
+      queryClient.invalidateQueries({ queryKey: ["get-user"] });
 
-      if(user.isActive){
+      if (user.isActive) {
         router.push("/");
-        
-      }else {
-        router.push("/complete-profile")
+      } else {
+        router.push("/complete-profile");
       }
       setOtp("");
     } catch (err) {
@@ -108,28 +105,28 @@ const Auth = () => {
 
   return (
     <section className="w-full h-screen pb-16 overflow-x-hidden overflow-y-scroll">
-    <article className="w-[95%]  sm:w-96 glassmorphism py-6 px-7 rounded-xl mx-auto mt-8 sm:mt-16 flex justify-center flex-col items-center">
-      <div className="w-full flex items-center justify-between mb-8">
-        {step === 2 ? (
-          <button
-            onClick={() => setStep((s) => s - 1)}
-            className="glassmorphism text--white p-2 rounded-xl"
-          >
-            <FaArrowRight />
-          </button>
-        ) : (
+      <article className="w-[95%]  sm:w-96 glassmorphism py-6 px-7 rounded-xl mx-auto mt-8 sm:mt-16 flex justify-center flex-col items-center">
+        <div className="w-full flex items-center justify-between mb-8">
+          {step === 2 ? (
+            <button
+              onClick={() => setStep((s) => s - 1)}
+              className="glassmorphism text--white p-2 rounded-xl"
+            >
+              <FaArrowRight />
+            </button>
+          ) : (
+            <span className="inline-block w-6"> </span>
+          )}
+          <h1 className="text--white text-3xl font-bold">فرانت شاپ</h1>
           <span className="inline-block w-6"> </span>
-        )}
-        <h1 className="text--white text-3xl font-bold">فرانت شاپ</h1>
-        <span className="inline-block w-6"> </span>
-      </div>
-      <div className="w-full text--white text-lg flex justify-start mb-10">
-        ورود | ثبت نام
-      </div>
-      <div className="w-full flex justify-center items-center">
-        {renderStep()}
-      </div>
-    </article>
+        </div>
+        <div className="w-full text--white text-lg flex justify-start mb-10">
+          ورود | ثبت نام
+        </div>
+        <div className="w-full flex justify-center items-center">
+          {renderStep()}
+        </div>
+      </article>
     </section>
   );
 };

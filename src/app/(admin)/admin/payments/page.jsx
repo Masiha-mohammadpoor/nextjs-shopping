@@ -8,8 +8,8 @@ import { toPersianDigits } from "@/utils/toPersianDigits";
 
 const Payments = () => {
   const { data, isLoading } = useGetPayments();
-  const {payments} = data || {};
-  console.log(payments)
+  const { payments } = data || {};
+  console.log(payments);
 
   return (
     <>
@@ -47,11 +47,13 @@ const Payments = () => {
                         {toPersianDigits(payment.invoiceNumber)}
                       </td>
                       <td className="table__td  whitespace-nowrap truncate">
-                        <div>
-                          <p>{payment.user.name}</p>
-                          <p>{toPersianDigits(payment.user.phoneNumber)}</p>
-                          <p>{payment.user.email}</p>
-                        </div>
+                        {payment?.user && (
+                          <div>
+                            <p>{payment?.user?.name}</p>
+                            <p>{toPersianDigits(payment?.user?.phoneNumber)}</p>
+                            <p>{payment?.user?.email}</p>
+                          </div>
+                        )}
                       </td>
                       <td className="table__td">
                         <div className="flex flex-col gap-y-2 items-start">
@@ -61,7 +63,10 @@ const Payments = () => {
                                 className="badge bg-blue-700 flex items-center gap-x-2"
                                 key={product._id}
                               >
-                                <span>{product.title}</span> <span className="text-red-700 font-bold">x{product.quantity}</span>
+                                <span>{product.title}</span>{" "}
+                                <span className="text-red-700 font-bold">
+                                  x{product.quantity}
+                                </span>
                               </span>
                             );
                           })}

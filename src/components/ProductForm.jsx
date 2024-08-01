@@ -16,7 +16,7 @@ const ProductForm = ({
   tags,
   setTags,
   isPending,
-  btnText
+  btnText,
 }) => {
   return (
     <form onSubmit={onSubmit} className="w-[300px] flex gap-y-4 flex-col">

@@ -2,7 +2,7 @@
 import Select from "react-select";
 import { SelectStyles } from "@/constants/SelectStyles";
 
-const SelectOption = ({onChange , options , value , defaultValue}) => {
+const SelectOption = ({ onChange, options, value, defaultValue }) => {
   return (
     <Select
       onChange={onChange}

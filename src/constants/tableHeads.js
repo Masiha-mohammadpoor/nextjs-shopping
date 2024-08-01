@@ -145,7 +145,6 @@ export const paymentTableHeads = [
   },
 ];
 
-
 export const couponTableHeads = [
   {
     id: 1,
@@ -187,5 +186,4 @@ export const couponTableHeads = [
     id: 10,
     label: "عملیات",
   },
-
 ];

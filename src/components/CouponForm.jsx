@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Input from "@/common/Input";
 import Radio from "@/common/Radio";
 import DatePicker from "react-multi-date-picker";
@@ -22,7 +22,7 @@ const CouponForm = ({
   products,
   isPending,
   btntext,
-  defaultValue
+  defaultValue,
 }) => {
   return (
     <form onSubmit={onSubmit} className="w-[300px] flex gap-y-4 flex-col">
@@ -95,7 +95,7 @@ const CouponForm = ({
           menuPlacement="auto"
           isMulti
           onChange={setProductIds}
-          options={[{title : "همه محصولات" , _id : "all"} , ...products]}
+          options={[{ title: "همه محصولات", _id: "all" }, ...products]}
           getOptionLabel={(option) => option.title}
           getOptionValue={(option) => option._id}
           styles={SelectStyles}

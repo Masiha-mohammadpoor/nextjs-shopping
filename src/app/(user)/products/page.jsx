@@ -7,8 +7,6 @@ import LikeButton from "./LikeButton";
 import { cookies } from "next/headers";
 import { toStringCookies } from "@/utils/toStringCookies";
 import Image from "next/image";
-import { toPersianNumberWithCommas } from "@/utils/putCommaInNumber";
-import { toPersianDigits } from "@/utils/toPersianDigits";
 import Price from "@/components/Price";
 import AddToCart from "./[slug]/AddToCart";
 export const dynamic = "force-dynamic";
@@ -54,16 +52,20 @@ const Products = async ({ searchParams }) => {
                   {p.brand} / {p.category.title}
                 </div>
               </div>
-              <div className="my-6 w-full flex justify-between items-center">
+              <div className="mt-6 mb-3 w-full flex justify-between items-center">
                 <Link href={`/products/${p.slug}`}>
                   <button className="transition-all duration-300 bg-blue-700 hover:bg-blue-800 text--white rounded-md px-3 py-1.5">
                     مشاهده
                   </button>
                 </Link>
-                <Price discount={p.discount} price={p.price} offPrice={p.offPrice}/>
+                <Price
+                  discount={p.discount}
+                  price={p.price}
+                  offPrice={p.offPrice}
+                />
               </div>
-              <div className="w-full my-3">
-                <AddToCart product={p}/>
+              <div className="w-full mb-3">
+                <AddToCart product={p} />
               </div>
             </div>
           );
