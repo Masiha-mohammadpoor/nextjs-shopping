@@ -1,4 +1,4 @@
-import { getProductById, getProducts } from "@/services/productService";
+import { getProductById, getProducts, getSingleProduct } from "@/services/productService";
 import { useQuery } from "@tanstack/react-query";
 
 const useGetProducts = () => {
@@ -22,5 +22,17 @@ export const useGetProductById = (id) => {
 
   return { data, isLoading };
 };
+
+export const useGetProductBySlug = (slug) => {
+  const { data, error, isLoading } = useQuery({
+    queryKey: ["get-product", slug],
+    queryFn: () => getSingleProduct(slug),
+    retry: false,
+    refetchOnWindowFocus: true,
+  });
+
+  return { data, isLoading };
+};
+
 
 export default useGetProducts;

@@ -16,8 +16,7 @@ const Profile = () => {
   const { data } = useGetUser();
   const { user, payments } = data || {};
 
-  if (user)
-    return (
+  if (user) return (
       <article>
         <div className="flex flex-col overflow-hidden">
           {/* welcome */}

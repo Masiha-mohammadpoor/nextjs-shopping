@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <section className="h-screen grid grid-cols-2 pt-10 lg:pt-0 pb-20 lg:px-16 px-8 items-center overflow-y-auto">
+    <section className="h-screen grid grid-cols-2 pt-10 lg:pt-0 pb-28 lg:px-16 px-8 items-center overflow-y-auto">
       <article className="lg:col-span-1 col-span-2 flex justify-center">
         <Image
           src={"/images/homepage.svg"}

@@ -28,7 +28,7 @@ const Products = async ({ searchParams }) => {
   return (
     <section className="grid grid-cols-4">
       <CategorySidebar categories={categories} />
-      <article className="w-screen lg:w-[100%] h-screen row-start-1 lg:row-start-auto pt-10 md:pt-14 pb-28 md:pb-20 grid grid-cols-12 col-span-4 lg:col-span-3 gap-5 gap-y-16 md:p-5 overflow-y-scroll">
+      <article className="w-screen lg:w-[100%] h-screen row-start-1 lg:row-start-auto pt-10 md:pt-14 pb-36 md:pb-20 grid grid-cols-12 col-span-4 lg:col-span-3 gap-5 gap-y-16 md:p-5 overflow-y-scroll">
         {products.map((p) => {
           return (
             <div

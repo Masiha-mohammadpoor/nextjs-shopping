@@ -12,7 +12,6 @@ const AddToCart = ({ product }) => {
   const { data } = useGetUser();
   const { isPending, mutateAsync } = useAddToCart();
   const { user, cart } = data || {};
-  console.log(cart);
 
   const addToCartHandler = async () => {
     if (!user) {
@@ -33,8 +32,6 @@ const AddToCart = ({ product }) => {
     if (!user) return false;
     return user?.cart?.products.some((p) => p.productId === product._id);
   };
-
-  console.log(isInCart(user, product));
 
   return (
     <div>

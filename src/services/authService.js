@@ -24,7 +24,7 @@ export const updateUser = (data) => {
   return http.patch("/user/update", data).then(({ data }) => data.data);
 };
 
-export const logoutUser = (data) => {
+export const logoutUser = () => {
   return http.post("/user/logout").then(({ data }) => data.data);
 };
 

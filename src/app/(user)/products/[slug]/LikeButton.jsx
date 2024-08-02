@@ -1,7 +1,7 @@
 "use client";
 
 import { likeProduct } from "@/services/productService";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
@@ -12,11 +12,14 @@ const LikeButton = ({ product }) => {
   const { user } = data || {};
   const { mutateAsync } = useMutation({ mutationFn: likeProduct });
   const router = useRouter();
+  const queryClient = useQueryClient();
+
 
   const likeHandler = async () => {
     try {
       const { message } = await mutateAsync(product._id);
       router.refresh();
+      queryClient.invalidateQueries({ queryKey: ["get-product"] });
       toast.success(message);
     } catch (err) {
       toast.error(err?.response?.data?.message);
@@ -25,7 +28,7 @@ const LikeButton = ({ product }) => {
   return (
     <div className="m-0 p-0">
       <button onClick={likeHandler}>
-        {user && product.likes.includes(user._id) ? (
+        {user && product.likes.includes(user?._id) ? (
           <FaHeart className="text-xl text-error m-0 p-0" />
         ) : (
           <FaRegHeart className="text-xl text-error m-0 p-0" />

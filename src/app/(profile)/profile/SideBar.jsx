@@ -2,9 +2,11 @@
 import useGetUser from "@/hooks/useAuth";
 import useProfileMenu from "@/hooks/useProfileMenu";
 import { logoutUser } from "@/services/authService";
+import { useQueryClient } from "@tanstack/react-query";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { IoClose } from "react-icons/io5";
 
@@ -13,11 +15,15 @@ const SideBar = () => {
   const { user } = data || {};
   const { showMenu, setShowMenu } = useProfileMenu();
   const pathname = usePathname();
+  const queryClient = useQueryClient();
+  const router= useRouter();
+
 
   const logoutHandler = async () => {
     try {
       await logoutUser();
-      window.location.href = "/";
+      queryClient.invalidateQueries({ queryKey: ["get-user"] });
+      router.push("/")
     } catch (err) {
       toast.error(err?.response?.data?.message);
     }
