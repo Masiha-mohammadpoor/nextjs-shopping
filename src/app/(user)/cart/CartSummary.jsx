@@ -47,6 +47,7 @@ const CartSummary = ({ payDetail }) => {
           value={couponCode}
           onChange={(e) => setCouponCode(e.target.value)}
           type="text"
+          placeholder="کد تخفیف ..."
           className="w-3/4 glassmorphism p-2 rounded-md outline-none font-normal text-center"
         />
         <button
@@ -58,17 +59,17 @@ const CartSummary = ({ payDetail }) => {
       </div>
       <div className="w-full flex justify-between items-center">
         <span>جمع کل</span>
-        <span>{toPersianNumberWithCommas(totalGrossPrice)}</span>
+        <span>{toPersianNumberWithCommas(totalGrossPrice)} تومان</span>
       </div>
       <div className="w-full flex justify-between items-center">
         <span>تخفیف</span>
         <span className="text-error">
-          {toPersianNumberWithCommas(totalOffAmount)}-
+          {toPersianNumberWithCommas(totalOffAmount)} تومان
         </span>
       </div>
       <div className="w-full flex justify-between items-center border-t pt-3 border-t-white">
         <span>مبلغ قابل پرداخت</span>
-        <span>{toPersianNumberWithCommas(totalPrice)}</span>
+        <span>{toPersianNumberWithCommas(totalPrice)} تومان</span>
       </div>
       <button
         className="transition-all duration-300 glassmorphism w-full rounded-md p-2 hover:bg-blue-700"

@@ -16,7 +16,8 @@ const Profile = () => {
   const { data } = useGetUser();
   const { user, payments } = data || {};
 
-  if (user) return (
+  if (user)
+    return (
       <article>
         <div className="flex flex-col overflow-hidden">
           {/* welcome */}
@@ -39,9 +40,11 @@ const Profile = () => {
                 </div>
               </div>
               <div className="col-span-6 sm:col-span-3 md:col-span-2 glassmorphism rounded-md text-white p-6 flex gap-x-4">
-                <div className="rounded-md p-3 text--white text-3xl bg-blue-600">
-                  <IoCartOutline />
-                </div>
+                <Link href="/profile/payment">
+                  <div className="rounded-md p-3 text--white text-3xl bg-blue-600">
+                    <IoCartOutline />
+                  </div>
+                </Link>
                 <div className="flex flex-col justify-between">
                   <p className="text-sm">خرید ها</p>
                   <p className="font-bold text-base">
@@ -50,9 +53,11 @@ const Profile = () => {
                 </div>
               </div>
               <div className="col-span-6 sm:col-span-3 md:col-span-2 glassmorphism rounded-md text-white p-6 flex gap-x-4">
-                <div className="rounded-md p-3 text--white text-3xl bg-blue-600">
-                  <IoWalletOutline />
-                </div>
+                <Link href="/profile/payment">
+                  <div className="rounded-md p-3 text--white text-3xl bg-blue-600">
+                    <IoWalletOutline />
+                  </div>
+                </Link>
                 <div className="flex flex-col justify-between">
                   <p className="text-sm">سفارش ها</p>
                   <p className="font-bold text-base">
@@ -91,53 +96,60 @@ const Profile = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {payments?.slice(-2).reverse()?.map((payment, index) => {
-                      return (
-                        <tr key={payment._id}>
-                          <td className="table__td font-bold text-lg">
-                            {toPersianDigits(index + 1)}
-                          </td>
-                          <td className="table__td  whitespace-nowrap truncate">
-                            {toPersianDigits(payment.invoiceNumber)}
-                          </td>
-                          <td className="table__td">
-                            <div className="flex flex-col gap-y-2 items-start">
-                              {payment.cart.productDetail.map((product) => {
-                                return (
-                                  <Link
-                                    href={`/products/${product.slug}`}
-                                    key={product._id}
-                                  >
-                                    <span className="badge bg-blue-700 flex items-center gap-x-2">
-                                      <span>{product.title}</span>{" "}
-                                      <span className="text-red-700 font-bold">
-                                        x{product.quantity}
+                    {payments
+                      ?.slice(-2)
+                      .reverse()
+                      ?.map((payment, index) => {
+                        return (
+                          <tr key={payment._id}>
+                            <td className="table__td font-bold text-lg">
+                              {toPersianDigits(index + 1)}
+                            </td>
+                            <td className="table__td  whitespace-nowrap truncate">
+                              {toPersianDigits(payment.invoiceNumber)}
+                            </td>
+                            <td className="table__td">
+                              <div className="flex flex-col gap-y-2 items-start">
+                                {payment.cart.productDetail.map((product) => {
+                                  return (
+                                    <Link
+                                      href={`/products/${product.slug}`}
+                                      key={product._id}
+                                    >
+                                      <span className="badge bg-blue-700 flex items-center gap-x-2">
+                                        <span>{product.title}</span>{" "}
+                                        <span className="text-red-700 font-bold">
+                                          x{product.quantity}
+                                        </span>
                                       </span>
-                                    </span>
-                                  </Link>
-                                );
-                              })}
-                            </div>
-                          </td>
-                          <td className="table__td font-bold text-lg">
-                            <div className="flex gap-x-1 items-center">
-                              {toPersianNumberWithCommas(payment.amount)}
-                              <span className="text-xs font-bold">تومان</span>
-                            </div>
-                          </td>
-                          <td className="table__td text-nowrap">
-                            {toLoacalDate(payment.createdAt)}
-                          </td>
-                          <td className="table__td">
-                            {payment.status === "COMPLETED" ? (
-                              <span className="badge badge--success">موفق</span>
-                            ) : (
-                              <span className="badge badge-error">ناموفق</span>
-                            )}
-                          </td>
-                        </tr>
-                      );
-                    })}
+                                    </Link>
+                                  );
+                                })}
+                              </div>
+                            </td>
+                            <td className="table__td font-bold text-lg">
+                              <div className="flex gap-x-1 items-center">
+                                {toPersianNumberWithCommas(payment.amount)}
+                                <span className="text-xs font-bold">تومان</span>
+                              </div>
+                            </td>
+                            <td className="table__td text-nowrap">
+                              {toLoacalDate(payment.createdAt)}
+                            </td>
+                            <td className="table__td">
+                              {payment.status === "COMPLETED" ? (
+                                <span className="badge badge--success">
+                                  موفق
+                                </span>
+                              ) : (
+                                <span className="badge badge-error">
+                                  ناموفق
+                                </span>
+                              )}
+                            </td>
+                          </tr>
+                        );
+                      })}
                   </tbody>
                 </table>
               </div>

@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import { toEnglishDigits } from "@/utils/toEnglishDigits";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { checkOtp, getOtp } from "@/services/authService";
-import SendOtpForm from "./sendOtpForm";
+import SendOtpForm from "./SendOtpForm";
 import CheckOtpForm from "./CheckOtpForm";
 import { toPersianDigits } from "@/utils/toPersianDigits";
 import { useRouter } from "next/navigation";

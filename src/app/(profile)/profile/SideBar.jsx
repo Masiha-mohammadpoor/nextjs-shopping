@@ -16,14 +16,14 @@ const SideBar = () => {
   const { showMenu, setShowMenu } = useProfileMenu();
   const pathname = usePathname();
   const queryClient = useQueryClient();
-  const router= useRouter();
-
+  const router = useRouter();
 
   const logoutHandler = async () => {
     try {
-      await logoutUser();
+      const { message } = await logoutUser();
+      toast.success(message);
       queryClient.invalidateQueries({ queryKey: ["get-user"] });
-      router.push("/")
+      router.push("/");
     } catch (err) {
       toast.error(err?.response?.data?.message);
     }
